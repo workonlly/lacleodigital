@@ -1,39 +1,34 @@
 import Home from './home';
-import Navbar from './header';
-import Footer from './footer';
-import OurProfiles from './sociallinks';
-import { useState,useEffect } from 'react';
-import Services from './services';
-import ContactForm from './email';
 
+
+import Services from './services';
+import Blog from './blog';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Casestudies from './casestudies';
+import Aboutus from './aboutus';
+import ContactUs from './contactus';
+import Show from './show';
 
 
 
 
 function App() {
 
- const[value,setvalue]=useState("home")
-useEffect(()=>{
- const click=()=>{
-  const id=window.location.search.split('=')[1]
- }
-})
   return (
     <>
+     <Router>
+      <Routes>
+        <Route path="/" element={<Home/>} />
+        <Route path="/services" element={<Services/>} />
+        <Route path="/casestudies" element={<Casestudies/>} />
+        <Route path="/aboutus" element={<Aboutus/>} />
+        <Route path="/blog" element={<Blog/>} />
+        <Route path="/contactus" element={<ContactUs/>} />
+        <Route path="/show" element={<Show/>} />
+        {/* Add more routes here */}
+      </Routes>
+    </Router>
 
-
-    <section className='sticky top-5 z-50'><Navbar/></section>
-
-        {value=="home" && <Home/>} 
-    
-         {value=="services" && <Services/>}
-      
-     
-     <section><ContactForm/></section>
-     <OurProfiles/>
-     <Footer></Footer>
-     
-    
     </>
   )
 }

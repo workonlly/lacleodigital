@@ -1,5 +1,8 @@
-import "./index.css"
+
 import { Swiper, SwiperSlide } from 'swiper/react';
+import useAppData from "./assets/data";
+import Navbar from './header';
+import Footer from './footer';
 const logos = [
   { src: '/Amazon-removebg-preview.png', alt: 'Amazon' },
   { src: '/Shopify-removebg-preview.png', alt: 'Shopify' },
@@ -33,8 +36,11 @@ const logos = [
   ];
 
 function Home() {
+  const { data,loading}=useAppData()
+  if(loading)  return <p>Loading data...</p>
   return (
     <>
+    <section className='sticky top-5 z-50'><Navbar/></section>
     <section className="relative min-h-screen flex items-center overflow-hidden mt-10">
       <div className="container mx-auto px-4 md:px-8 flex flex-col lg:flex-row items-center gap-12">
         
@@ -97,6 +103,46 @@ function Home() {
 
       </div>
     </section>
+   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 p-10">
+    {data.maindata.map((item) => {
+  const imgItem = data.mainimg.find((stem) => stem.id === item.id);
+
+  return (
+    <div
+      key={item.id}
+      className="block bg-white/70 shadow-xl p-4 min-h-[200px] flex flex-col items-center text-center gap-4 rounded-2xl hover:scale-105 transition-transform duration-300 hover:border-2 hover:border-black w-full"
+    >
+      <a
+        href={`/dista/show/show.html?id=${item.id}`}
+        className="flex flex-col items-center gap-4 w-full no-underline"
+      >
+        {/* Image */}
+        <div className="rounded-full h-20 w-20 overflow-hidden">
+          {imgItem && (
+            <img
+              src={imgItem.imageurl}
+              alt={item.promo}
+              className="object-cover w-full h-full rounded-full"
+            />
+          )}
+        </div>
+
+        {/* Promo title */}
+        <h3 className="text-xl font-semibold text-black">{item.promo}</h3>
+
+        {/* Heading */}
+        <p className="text-sm px-2 text-black">{item.heading}</p>
+
+        {/* Learn More Button */}
+        <span className="text-black px-3 py-1 hover:text-white hover:bg-black rounded-full text-sm font-medium transition">
+          Learn more →
+        </span>
+      </a>
+    </div>
+  );
+})}
+</div>
+
 
          <section className="py-20 bg-gradient-to-br from-gray-50 to-blue-50" id="why-choose-us">
       <div className="container mx-auto px-4">
@@ -238,7 +284,7 @@ function Home() {
         </div>
       </div>
     </section>
-    <section className="text-center space-y-4 w-full max-w-full px-4 py-10 bg-gradient-to-b from-blue-900 to-blue-600">
+    <section className="text-center space-y-4 w-full max-w-full px-4 py-10 bg-gradient-to-b from-blue-900 to-blue-600 rounded-b-md ">
       <h2 className="text-3xl font-bold text-white">Affiliate Partner</h2>
       <p className="text-white">We have partnered with top brands</p>
 
@@ -280,6 +326,7 @@ function Home() {
         </Swiper>
       </div>
     </section>
+    <Footer></Footer>
      </>
   )
 }

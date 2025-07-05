@@ -1,50 +1,82 @@
-
-import  { useEffect, useState } from 'react'
+// hooks/useAppData.ts
+import { useEffect, useState } from 'react'
 import { supabase } from '../supabase'
 
-interface Record {
+export interface Maindata {
   id: number
   promo: string
   heading: string
+  keywords: string[]
+  secheading: string
+  secpara: string
+  text: string
 }
 
-const DataFetcher = () => {
-  const [data, setData] = useState<Record[]>([])
+export interface Maindata2 {
+  id: number
+  sid: number
+  promo: string
+  heading: string
+  keywords: string[]
+  secheading: string
+  secpara: string
+  text: string
+}
+
+export interface Mainkey {
+  id: number
+  title: string
+  metakeywords: string[]
+  description: string
+}
+
+export interface Mainimg {
+  id: number
+  imageurl: string
+}
+
+interface AppData {
+  maindata: Maindata[]
+  maindata2: Maindata2[]
+  mainkey: Mainkey[]
+  mainimg: Mainimg[]
+}
+
+const useAppData = () => {
+  const [data, setData] = useState<AppData>({
+    maindata: [],
+    maindata2: [],
+    mainkey: [],
+    mainimg: [],
+  })
+
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    const fetchData = async () => {
-      const { data, error } = await supabase.from('maindata').select('*')
+    const fetchAll = async () => {
+      setLoading(true)
 
-      if (error) {
-        console.error('Error fetching data:', error)
-      } else {
-        setData(data)
-      }
+      const [r1, r2, r3, r4] = await Promise.all([
+        supabase.from('maindata').select('*'),
+        supabase.from('maindata2').select('*'),
+        supabase.from('maindatakeywords').select('*'),
+        supabase.from('mainimages').select('*'),
+      ])
+
+      setData({
+        maindata: (r1.data || []) as Maindata[],
+        maindata2: (r2.data || []) as Maindata2[],
+        mainkey: (r3.data || []) as Mainkey[],
+        mainimg: (r4.data || []) as Mainimg[],
+      })
 
       setLoading(false)
     }
 
-    fetchData()
+    fetchAll()
   }, [])
 
-  return (
-    <div className="p-6">
-      <h2 className="text-2xl font-bold mb-4">Fetched Data</h2>
-      {loading ? (
-        <p className="text-gray-600">Loading...</p>
-      ) : (
-        <ul className="space-y-3">
-          {data.map((item) => (
-            <li key={item.id} className="border p-4 rounded bg-white shadow">
-              <p className="text-lg font-semibold">{item.promo}</p>
-              <p className="text-gray-600">{item.heading}</p>
-            </li>
-          ))}
-        </ul>
-      )}
-    </div>
-  )
+  return { data, loading }
 }
 
-export default DataFetcher
+export default useAppData
