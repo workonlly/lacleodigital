@@ -1,12 +1,10 @@
  import useAppData from "./assets/data"
- import { useGlobal } from "./assets/globalvalue"
  import Navbar from './header';
 import Footer from './footer';
 import "./button.css"
 
 function Services() {
   const { data, loading } = useAppData()
-  const { globalValue } = useGlobal();
 
   
 
