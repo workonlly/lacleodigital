@@ -1,1 +1,80 @@
 @import "tailwindcss";
+
+body{
+    background-color: #ffffff;   
+}
+
+.swiper {
+  width: 100%;
+}
+
+.swiper-slide {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ffffff;
+  font-size: 20px;
+  color: rgb(2, 2, 2);
+
+  border-radius: 12px;
+}
+
+.swiper-wrapper {
+  transition-timing-function: linear !important;
+}
+
+ .typewriter {
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 2px solid rgb(72, 180, 223);
+
+
+  animation:
+    typing 3s steps(22, end) forwards,
+    blink-caret 0.7s step-end 6,
+    remove-caret 4.2s forwards;
+}
+
+/* Typing effect */
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+/* Cursor blink */
+@keyframes blink-caret {
+  0%, 100% { border-color: rgb(72, 180, 223) }
+  70% { border-color: transparent }
+}
+
+/* Cursor removal */
+@keyframes remove-caret {
+  to { border-right: 0 }
+}
+
+
+.wave-text span {
+    display: inline-block;
+    animation: wave 2s ease-in-out infinite;
+}
+
+.wave-text span:nth-child(1) {
+    animation-delay: 0s;
+}
+.wave-text span:nth-child(2) {
+    animation-delay: 0.2s;
+}
+.wave-text span:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+
+@keyframes wave {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+}

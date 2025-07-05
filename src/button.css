@@ -1,0 +1,197 @@
+@import "tailwindcss";
+
+
+.button-1{
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 20px;
+    width: 200px;
+    height: 50px;
+    background: transparent;
+}
+.button-2{
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 20px;
+    width: 200px;
+    height: 50px;
+    -webkit-mask-image: url("/public/nature-sprite.png");
+    mask-image: url("/public/nature-sprite.png");
+    -webkit-mask-size: 2300% 100%;
+    mask-size: 2300% 100%;
+    background-repeat: no-repeat;
+  
+    /* Load-in animation */
+    -webkit-animation: ani2 0.7s steps(22) forwards;
+    animation: ani2 0.7s steps(22) forwards;
+
+    background-color:#38b000;
+}
+.button-3{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 200px;
+    height: 50px;
+    color: rgb(255, 255, 255);
+    background: transparent;
+ }
+.button-1::before{
+    content: "";
+    width: 100%;
+    height: 1.55em;
+    position: absolute;
+    left: 0;
+    bottom: -1.55em;
+    background: radial-gradient(
+      ellipse at center,
+      rgba(0, 0, 0, 0.35) 0%,
+      rgba(0, 0, 0, 0) 80%
+    );
+    opacity: 0;
+    transition: all 0.65s;
+    pointer-events: none;
+    z-index: -1;
+}
+
+ .g-hov:hover .button-1::before{
+    opacity: 1;
+}
+.g-hov:hover .button-1{
+  
+    transform: translateY(-0.50em);
+}
+
+
+.g-hov:hover .button-2{
+    animation: ani 0.7s steps(22) forwards;
+    transform: translateY(-0.50em);
+   
+}
+
+ .g-hov:hover .button-3{
+   background-color:black;
+    color:rgb(255, 255, 255);
+    transform: translateY(-0.50em);
+    transition: 2s;
+    border-radius:20px
+ }
+
+  
+  /* Hover animation forward */
+  @keyframes ani {
+    from {
+      -webkit-mask-position: 0 0;
+      mask-position: 0 0;
+    }
+    to {
+      -webkit-mask-position: 100% 0;
+      mask-position: 100% 0;
+    }
+  }
+  
+  /* Reverse animation on load */
+  @keyframes ani2 {
+    from {
+      -webkit-mask-position: 100% 0;
+      mask-position: 100% 0;
+    }
+    to {
+      -webkit-mask-position: 0 0;
+      mask-position: 0 0;
+    }
+  }
+  
+  .g-hov:hover {
+    animation: yo 0.7s ease-in-out 0.3s infinite;
+  }
+  
+  @keyframes yo {
+    0% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-4px);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+  
+
+  @media screen and (max-width: 640px) {
+  .button-1,
+  .button-2,
+  .button-3 {
+    width: 140px;
+    height: 36px;
+    border-radius: 12px;
+  }
+
+  .button-3 {
+    font-size: 8px;
+  }
+}
+
+
+ .block {
+  display: inline-block;
+  position: relative;
+}
+
+.fstblock {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  z-index: 1000;
+  padding: 10px 0;
+}
+
+.block:hover > .fstblock {
+  display: block;
+}
+
+.dropdown-item {
+  position: relative;
+  white-space: nowrap;
+}
+
+.dropdown-item > a {
+  display: block;
+  padding: 10px 20px;
+  color: black;
+  text-decoration: none;
+}
+
+.dropdown-item > a:hover {
+  background-color: black;
+  color: white;
+}
+
+.submenu {
+  display: none;
+  position: absolute;
+  top: -50%;
+  left: 100%;
+  background-color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  padding: 10px 0;
+  z-index: 1001;
+  width:280%;
+ 
+
+}
+
+.dropdown-item:hover .submenu {
+  display: block;
+}
+

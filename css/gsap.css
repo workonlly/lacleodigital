@@ -1,0 +1,135 @@
+html, body {
+  max-width: 100vw;
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
+
+*, *::before, *::after {
+  box-sizing: inherit;
+}
+
+section, header, .max-w-5xl, .w-full, #wave, #em, #fe {
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+/* Prevent fixed-width elements from breaking layout */
+[class*="w-["] {
+  max-width: 100vw !important;
+  width: 100% !important;
+}
+
+/* Prevent min-width from breaking layout */
+[class*="min-w-["] {
+  min-width: 0 !important;
+}
+
+/* Prevent absolute/fixed elements from overflowing */
+.absolute, .fixed {
+  max-width: 100vw;
+  overflow-x: auto;
+}
+
+/* Ensure text, links, and images wrap and scale */
+body, .container, .max-w-5xl, .w-full, section, header, div, p, a, span {
+  word-break: break-word;
+  overflow-wrap: anywhere;
+  box-sizing: border-box;
+}
+
+img, video {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  aspect-ratio: 4/3;
+}
+
+ul, ol {
+  padding-left: 1.2em;
+}
+
+/* Remove excessive padding/margin on mobile */
+@media (max-width: 640px) {
+  h1, h2, h3, h4, h5, h6 {
+    font-size: 1.1em;
+    word-break: break-word;
+  }
+  section, header, .container, .max-w-5xl, .w-full {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    max-width: 100vw !important;
+    width: 100vw !important;
+  }
+  [class*="p-"], [class*="px-"], [class*="py-"], [class*="m-"], [class*="mx-"], [class*="my-"] {
+    padding-left: 0.5rem !important;
+    padding-right: 0.5rem !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+  img, video {
+    max-width: 100vw !important;
+    height: auto !important;
+  }
+  a, span {
+    word-break: break-all;
+  }
+}
+
+.text-4 {
+  min-height: 350px;
+  will-change: opacity, transform;
+  position: relative;
+}
+
+/* Container for Services + Dropdown */
+.block {
+  display: inline-block;
+  position: relative;
+}
+
+/* Initially hidden dropdown */
+.fstblock {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 220px;
+  background-color: white;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  border-radius: 4px;
+  z-index: 1000;
+  padding: 10px 0;
+}
+
+/* Show on hover */
+.block:hover .fstblock {
+  display: block;
+}
+
+/* Menu item styling */
+.fstblock div {
+  padding: 10px 20px;
+  cursor: pointer;
+  color: black;
+  white-space: nowrap;
+}
+
+.fstblock div:hover {
+  background-color: black;
+  color: white;
+}
+
+/* Nav link */
+.nav-link {
+  font-weight: bold;
+  text-decoration: none;
+  padding: 10px 20px;
+  display: inline-block;
+  background-color: transparent;
+  cursor: pointer;
+}
