@@ -1,11 +1,12 @@
-
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper/modules';
+import 'swiper/css';
 import useAppData from "./assets/data";
 import Navbar from './header';
 import Footer from './footer';
 import ClientReviewsSwiper from './assets/ClientReviewsSwiper';
 import { Link } from 'react-router-dom';
+
 const logos = [
   { src: '/Amazon-removebg-preview.png', alt: 'Amazon' },
   { src: '/Shopify-removebg-preview.png', alt: 'Shopify' },
@@ -27,7 +28,7 @@ const logos = [
       image: '/livespace.pdf-removebg-preview.png',
       alt: 'Livspace',
       description:
-        'Through experience testing, Livspace optimized their website’s user interface, resulting in a 40% decrease in bounce rate, improved user engagement, and a 25% increase in online bookings.',
+        "Through experience testing, Livspace optimized their website's user interface, resulting in a 40% decrease in bounce rate, improved user engagement, and a 25% increase in online bookings.",
     },
     {
       title: 'LambdaTest',
@@ -298,32 +299,42 @@ function Home() {
           spaceBetween={30}
           slidesPerView={3}
           loop={true}
+          speed={2000}
           autoplay={{
-            delay: 2500,
+            delay: 0,
             disableOnInteraction: false,
+            pauseOnMouseEnter: false,
           }}
           breakpoints={{
+            480: {
+              slidesPerView: 2,
+              spaceBetween: 15,
+            },
             640: {
               slidesPerView: 3,
+              spaceBetween: 20,
             },
             768: {
               slidesPerView: 4,
+              spaceBetween: 25,
             },
             1024: {
               slidesPerView: 5,
+              spaceBetween: 30,
             },
           }}
         >
           {logos.map((logo, index) => (
             <SwiperSlide
               key={index}
-              className="flex items-center justify-center bg-white h-[10vh]"
+              className="flex items-center justify-center bg-white h-[10vh] transition-transform duration-300 hover:scale-105"
             >
               <img
                 src={logo.src}
                 alt={logo.alt}
-                className="h-full w-auto object-contain"
+                className="h-full w-auto object-contain max-w-full"
                 loading="lazy"
+                draggable="false"
               />
             </SwiperSlide>
           ))}
