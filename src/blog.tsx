@@ -8,17 +8,9 @@ function Blog() {
     <section className='sticky top-5 z-50'><Navbar/></section>
       
        <header className="text-center py-8 space-y-2 mt-5 bg-[#4361ee]">
-       <h2 className="text-3xl text-white font-bold">Services</h2>
+       <h2 className="text-3xl text-white font-bold">Blog</h2>
        <h6 className="text-lg text-white text-gray-500">Services &nbsp;•&nbsp; Digital Marketing &nbsp;•&nbsp; Social Media Marketing</h6>
      </header>
-   
-   
-        <section className="px-6 py-12 max-w-5xl mx-auto space-y-4 ">
-       <h3 className="text-2xl font-semibold text-center">LaClеo Digital: Your Idеal Partnеr for Social Mеdia Markеting</h3>
-       <p>
-         In today’s digital landscapе, Social Mеdia Markеting has bеcomе an indispеnsablе tool for businеssеs to rеach and еngagе thеir targеt audiеncе. LaClеo Digital helps you stay ahead with tailored strategies and deep expertise.
-       </p>
-     </section>
 
 
 <section className="bg-[#4361ee] py-10 px-6">

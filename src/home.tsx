@@ -1,8 +1,10 @@
 
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { Autoplay } from 'swiper/modules';
 import useAppData from "./assets/data";
 import Navbar from './header';
 import Footer from './footer';
+import ClientReviewsSwiper from './assets/ClientReviewsSwiper';
 import { Link } from 'react-router-dom';
 const logos = [
   { src: '/Amazon-removebg-preview.png', alt: 'Amazon' },
@@ -285,12 +287,13 @@ function Home() {
         </div>
       </div>
     </section>
-    <section className="text-center space-y-4 w-full max-w-full px-4 py-10 bg-gradient-to-b from-blue-900 to-blue-600 rounded-b-md ">
+    <section className="text-center space-y-4 w-full max-w-full px-4 py-10 bg-gradient-to-b from-blue-900 to-blue-600 rounded-b-md">
       <h2 className="text-3xl font-bold text-white">Affiliate Partner</h2>
       <p className="text-white">We have partnered with top brands</p>
 
       <div className="bg-white h-[15vh] w-full overflow-hidden rounded-md shadow-md">
         <Swiper
+          modules={[Autoplay]}
           className="w-full h-[10vh]"
           spaceBetween={30}
           slidesPerView={3}
@@ -327,6 +330,10 @@ function Home() {
         </Swiper>
       </div>
     </section>
+     <div className=" bg-gray-100">
+      <h1 className="text-3xl font-bold text-center mb-6">Client Reviews</h1>
+      <ClientReviewsSwiper />
+    </div>
     <Footer></Footer>
      </>
   )

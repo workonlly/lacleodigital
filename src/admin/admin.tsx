@@ -11,7 +11,14 @@ function Admin() {
   if (loading) return <p className="text-center text-white">Loading data...</p>;
 
   const selectedMainKey = data.mainkey.filter((item) => item.id === tag);
-  const selectedSubItems = data.maindata2.filter((item) => item.id === tag);
+  const selectedSubItems = data.maindata2.filter((item) => item.id === tag || item.sid === tag);
+  const selectedItems = data.maindata.filter((item) => item.id === tag);
+  
+  // Debug: let's see what we're getting
+  console.log('Current tag:', tag);
+  console.log('selectedMainKey:', selectedMainKey);
+  console.log('selectedItems:', selectedItems);
+  console.log('selectedSubItems:', selectedSubItems);
 
   const handleInputChange = (field: string, value: string) => {
     setUpdates((prev) => ({ ...prev, [field]: value }));
@@ -20,6 +27,31 @@ function Admin() {
   const handleUpdate = (field: string, value: string) => {
     console.log(`Updating ${field} to:`, value);
     // Here you'd typically send data to your backend
+  };
+
+  // Function to get section name based on tag
+  const getSectionName = (tagId: number) => {
+    const sections = [
+      { label: "Home", id: 111 },
+      { label: "Services", id: 112 },
+      { label: "Case Studies", id: 113 },
+      { label: "About Us", id: 114 },
+      { label: "Blog", id: 115 },
+      { label: "Contact Us", id: 116 },
+    ];
+    
+    const section = sections.find(s => s.id === tagId);
+    if (section) return section.label;
+    
+    // Check if it's a maindata item
+    const mainItem = data.maindata.find(item => item.id === tagId);
+    if (mainItem) return mainItem.promo;
+    
+    // Check if it's a sub item
+    const subItem = data.maindata2.find(item => item.sid === tagId);
+    if (subItem) return `${subItem.promo} (Sub Item)`;
+    
+    return 'Content Editor';
   };
 
   return (
@@ -65,7 +97,7 @@ function Admin() {
       {/* Main Content */}
       <main className="flex flex-col gap-1 w-4/5 h-full relative">
         {/* Sub Items */}
-        <div className="w-full h-1/4 bg-white rounded-sm p-4 overflow-y-auto">
+        <div className="w-full h-1/4 bg-white rounded-sm p-4 overflow-y-auto flex-shrink-0">
           <h3 className="text-lg font-bold mb-2">Sub Items</h3>
           <div className="flex flex-wrap gap-2">
             {selectedSubItems.map((item) => (
@@ -81,8 +113,13 @@ function Admin() {
         </div>
 
         {/* Update Section */}
-        <div className="w-full h-3/4 bg-white rounded-sm p-4 overflow-y-auto">
-          {selectedMainKey.length > 0 ? (
+        <div className="w-full flex-1 bg-white rounded-sm p-4 overflow-hidden">
+          <h3 className="text-lg font-bold mb-4">
+            Editing: {getSectionName(tag)}
+          </h3>
+
+          <div className="h-full overflow-y-auto pr-2">
+            {selectedMainKey.length > 0 ? (
             selectedMainKey.map((item) => (
               <div key={item.id} className="space-y-4">
                 {/* Title */}
@@ -150,9 +187,309 @@ function Admin() {
                 </div>
               </div>
             ))
-          ) : (
-            <p className="text-gray-500">No data available for this section.</p>
-          )}
+          ) : selectedItems.length > 0 ? (
+            selectedItems.map((item) => (
+              <div key={item.id} className="space-y-4">
+                <h4 className="text-lg font-semibold mb-4">{item.promo}</h4>
+                
+                {/* Promo */}
+                <div>
+                  <label className="font-semibold text-gray-700">Promo</label>
+                  <input
+                    type="text"
+                    value={updates[`promo_${item.id}`] ?? item.promo}
+                    onChange={(e) => handleInputChange(`promo_${item.id}`, e.target.value)}
+                    className="w-full mt-1 p-2 border rounded"
+                  />
+                  <button
+                    onClick={() => handleUpdate(`promo_${item.id}`, updates[`promo_${item.id}`] ?? item.promo)}
+                    className="mt-1 px-3 py-1 bg-black text-white rounded hover:bg-gray-800"
+                  >
+                    Update Promo
+                  </button>
+                </div>
+
+                {/* Heading */}
+                <div>
+                  <label className="font-semibold text-gray-700">Heading</label>
+                  <input
+                    type="text"
+                    value={updates[`heading_${item.id}`] ?? item.heading}
+                    onChange={(e) => handleInputChange(`heading_${item.id}`, e.target.value)}
+                    className="w-full mt-1 p-2 border rounded"
+                  />
+                  <button
+                    onClick={() => handleUpdate(`heading_${item.id}`, updates[`heading_${item.id}`] ?? item.heading)}
+                    className="mt-1 px-3 py-1 bg-black text-white rounded hover:bg-gray-800"
+                  >
+                    Update Heading
+                  </button>
+                </div>
+
+                {/* Secondary Heading */}
+                <div>
+                  <label className="font-semibold text-gray-700">Secondary Heading</label>
+                  <input
+                    type="text"
+                    value={updates[`secheading_${item.id}`] ?? item.secheading}
+                    onChange={(e) => handleInputChange(`secheading_${item.id}`, e.target.value)}
+                    className="w-full mt-1 p-2 border rounded"
+                  />
+                  <button
+                    onClick={() => handleUpdate(`secheading_${item.id}`, updates[`secheading_${item.id}`] ?? item.secheading)}
+                    className="mt-1 px-3 py-1 bg-black text-white rounded hover:bg-gray-800"
+                  >
+                    Update Secondary Heading
+                  </button>
+                </div>
+
+                {/* Secondary Paragraph */}
+                <div>
+                  <label className="font-semibold text-gray-700">Secondary Paragraph</label>
+                  <textarea
+                    rows={3}
+                    value={updates[`secpara_${item.id}`] ?? item.secpara}
+                    onChange={(e) => handleInputChange(`secpara_${item.id}`, e.target.value)}
+                    className="w-full mt-1 p-2 border rounded"
+                  />
+                  <button
+                    onClick={() => handleUpdate(`secpara_${item.id}`, updates[`secpara_${item.id}`] ?? item.secpara)}
+                    className="mt-1 px-3 py-1 bg-black text-white rounded hover:bg-gray-800"
+                  >
+                    Update Secondary Paragraph
+                  </button>
+                </div>
+
+                {/* Main Text */}
+                <div>
+                  <label className="font-semibold text-gray-700">Main Text</label>
+                  <textarea
+                    rows={4}
+                    value={updates[`text_${item.id}`] ?? item.text}
+                    onChange={(e) => handleInputChange(`text_${item.id}`, e.target.value)}
+                    className="w-full mt-1 p-2 border rounded"
+                  />
+                  <button
+                    onClick={() => handleUpdate(`text_${item.id}`, updates[`text_${item.id}`] ?? item.text)}
+                    className="mt-1 px-3 py-1 bg-black text-white rounded hover:bg-gray-800"
+                  >
+                    Update Main Text
+                  </button>
+                </div>
+
+                {/* Keywords */}
+                <div>
+                  <label className="font-semibold text-gray-700">Keywords</label>
+                  <input
+                    type="text"
+                    value={
+                      updates[`keywords_${item.id}`] ??
+                      (Array.isArray(item.keywords)
+                        ? item.keywords.join(", ")
+                        : item.keywords || "")
+                    }
+                    onChange={(e) => handleInputChange(`keywords_${item.id}`, e.target.value)}
+                    className="w-full mt-1 p-2 border rounded"
+                  />
+                  <button
+                    onClick={() => handleUpdate(`keywords_${item.id}`, updates[`keywords_${item.id}`] ?? (Array.isArray(item.keywords) ? item.keywords.join(", ") : item.keywords))}
+                    className="mt-1 px-3 py-1 bg-black text-white rounded hover:bg-gray-800"
+                  >
+                    Update Keywords
+                  </button>
+                </div>
+              </div>
+            ))
+          ) : selectedSubItems.length > 0 ? (
+            selectedSubItems.map((item) => (
+              <div key={item.sid} className="space-y-4">
+                <h4 className="text-lg font-semibold mb-4">{item.promo} (Sub Item)</h4>
+                
+                {/* Promo */}
+                <div>
+                  <label className="font-semibold text-gray-700">Promo</label>
+                  <input
+                    type="text"
+                    value={updates[`promo_${item.sid}`] ?? item.promo}
+                    onChange={(e) => handleInputChange(`promo_${item.sid}`, e.target.value)}
+                    className="w-full mt-1 p-2 border rounded"
+                  />
+                  <button
+                    onClick={() => handleUpdate(`promo_${item.sid}`, updates[`promo_${item.sid}`] ?? item.promo)}
+                    className="mt-1 px-3 py-1 bg-black text-white rounded hover:bg-gray-800"
+                  >
+                    Update Promo
+                  </button>
+                </div>
+
+                {/* Heading */}
+                <div>
+                  <label className="font-semibold text-gray-700">Heading</label>
+                  <input
+                    type="text"
+                    value={updates[`heading_${item.sid}`] ?? item.heading}
+                    onChange={(e) => handleInputChange(`heading_${item.sid}`, e.target.value)}
+                    className="w-full mt-1 p-2 border rounded"
+                  />
+                  <button
+                    onClick={() => handleUpdate(`heading_${item.sid}`, updates[`heading_${item.sid}`] ?? item.heading)}
+                    className="mt-1 px-3 py-1 bg-black text-white rounded hover:bg-gray-800"
+                  >
+                    Update Heading
+                  </button>
+                </div>
+
+                {/* Secondary Heading */}
+                <div>
+                  <label className="font-semibold text-gray-700">Secondary Heading</label>
+                  <input
+                    type="text"
+                    value={updates[`secheading_${item.sid}`] ?? item.secheading}
+                    onChange={(e) => handleInputChange(`secheading_${item.sid}`, e.target.value)}
+                    className="w-full mt-1 p-2 border rounded"
+                  />
+                  <button
+                    onClick={() => handleUpdate(`secheading_${item.sid}`, updates[`secheading_${item.sid}`] ?? item.secheading)}
+                    className="mt-1 px-3 py-1 bg-black text-white rounded hover:bg-gray-800"
+                  >
+                    Update Secondary Heading
+                  </button>
+                </div>
+
+                {/* Secondary Paragraph */}
+                <div>
+                  <label className="font-semibold text-gray-700">Secondary Paragraph</label>
+                  <textarea
+                    rows={3}
+                    value={updates[`secpara_${item.sid}`] ?? item.secpara}
+                    onChange={(e) => handleInputChange(`secpara_${item.sid}`, e.target.value)}
+                    className="w-full mt-1 p-2 border rounded"
+                  />
+                  <button
+                    onClick={() => handleUpdate(`secpara_${item.sid}`, updates[`secpara_${item.sid}`] ?? item.secpara)}
+                    className="mt-1 px-3 py-1 bg-black text-white rounded hover:bg-gray-800"
+                  >
+                    Update Secondary Paragraph
+                  </button>
+                </div>
+
+                {/* Main Text */}
+                <div>
+                  <label className="font-semibold text-gray-700">Main Text</label>
+                  <textarea
+                    rows={4}
+                    value={updates[`text_${item.sid}`] ?? item.text}
+                    onChange={(e) => handleInputChange(`text_${item.sid}`, e.target.value)}
+                    className="w-full mt-1 p-2 border rounded"
+                  />
+                  <button
+                    onClick={() => handleUpdate(`text_${item.sid}`, updates[`text_${item.sid}`] ?? item.text)}
+                    className="mt-1 px-3 py-1 bg-black text-white rounded hover:bg-gray-800"
+                  >
+                    Update Main Text
+                  </button>
+                </div>
+
+                {/* Keywords */}
+                <div>
+                  <label className="font-semibold text-gray-700">Keywords</label>
+                  <input
+                    type="text"
+                    value={
+                      updates[`keywords_${item.sid}`] ??
+                      (Array.isArray(item.keywords)
+                        ? item.keywords.join(", ")
+                        : item.keywords || "")
+                    }
+                    onChange={(e) => handleInputChange(`keywords_${item.sid}`, e.target.value)}
+                    className="w-full mt-1 p-2 border rounded"
+                  />
+                  <button
+                    onClick={() => handleUpdate(`keywords_${item.sid}`, updates[`keywords_${item.sid}`] ?? (Array.isArray(item.keywords) ? item.keywords.join(", ") : item.keywords))}
+                    className="mt-1 px-3 py-1 bg-black text-white rounded hover:bg-gray-800"
+                  >
+                    Update Keywords
+                  </button>
+                </div>
+
+                {/* Display IDs for reference */}
+                <div className="mt-4 pt-4 border-t border-gray-200">
+                  <p className="text-sm text-gray-600"><strong>Sub ID:</strong> {item.sid}</p>
+                  <p className="text-sm text-gray-600"><strong>Main ID:</strong> {item.id}</p>
+                </div>
+              </div>
+            ))
+          ) : selectedMainKey.length > 0 ? (
+            selectedMainKey.map((item) => (
+              <div key={item.id} className="space-y-4">
+                {/* Title */}
+                <div>
+                  <label className="font-semibold text-gray-700">Title</label>
+                  <input
+                    type="text"
+                    value={updates.title ?? item.title}
+                    onChange={(e) => handleInputChange("title", e.target.value)}
+                    className="w-full mt-1 p-2 border rounded"
+                  />
+                  <button
+                    onClick={() => handleUpdate("title", updates.title ?? item.title)}
+                    className="mt-1 px-3 py-1 bg-black text-white rounded hover:bg-gray-800"
+                  >
+                    Update Title
+                  </button>
+                </div>
+
+                {/* Description */}
+                <div>
+                  <label className="font-semibold text-gray-700">Description</label>
+                  <textarea
+                    rows={3}
+                    value={updates.description ?? item.description}
+                    onChange={(e) => handleInputChange("description", e.target.value)}
+                    className="w-full mt-1 p-2 border rounded"
+                  />
+                  <button
+                    onClick={() => handleUpdate("description", updates.description ?? item.description)}
+                    className="mt-1 px-3 py-1 bg-black text-white rounded hover:bg-gray-800"
+                  >
+                    Update Description
+                  </button>
+                </div>
+
+                {/* Keywords */}
+                <div>
+                  <label className="font-semibold text-gray-700">Keywords</label>
+                  <input
+                    type="text"
+                    value={
+                      updates.keywords ??
+                      (Array.isArray(item.metakeywords)
+                        ? item.metakeywords.join(", ")
+                        : item.metakeywords || "")
+                    }
+                    onChange={(e) => handleInputChange("keywords", e.target.value)}
+                    className="w-full mt-1 p-2 border rounded"
+                  />
+                  <button
+                    onClick={() =>
+                      handleUpdate(
+                        "keywords",
+                        updates.keywords ??
+                          (Array.isArray(item.metakeywords)
+                            ? item.metakeywords.join(", ")
+                            : item.metakeywords)
+                      )
+                    }
+                    className="mt-1 px-3 py-1 bg-black text-white rounded hover:bg-gray-800"
+                  >
+                    Update Keywords
+                  </button>
+                </div>
+              </div>
+            ))) : (
+              <p className="text-gray-500">No data available for this section.</p>
+            )}
+          </div>
         </div>
       </main>
     </div>
