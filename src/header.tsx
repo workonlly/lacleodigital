@@ -32,11 +32,11 @@ export default function Navbar() {
       {isMobileMenuOpen && (
         <div className="md:hidden absolute top-full left-0 w-full bg-white shadow-md z-40 flex flex-col text-center py-4">
           <Link to="/?id=111" className="py-2 font-medium hover:bg-black hover:text-white">Home</Link>
-          <Link to="/dista/services/index.html?id=112" className="py-2 font-medium hover:bg-black hover:text-white">Services</Link>
-          <Link to="/dista/case/index.html?id=113" className="py-2 font-medium hover:bg-black hover:text-white">Case Studies</Link>
-          <Link to="/dista/aboutus/index.html?id=114" className="py-2 font-medium hover:bg-black hover:text-white">About Us</Link>
-          <Link to="/dista/blog/index.html?id=115" className="py-2 font-medium hover:bg-black hover:text-white">Blog</Link>
-          <Link to="/dista/contactus/index.html?id=116" className="py-2 font-medium hover:bg-black hover:text-white">Contact Us</Link>
+          <Link to="/services" className="py-2 font-medium hover:bg-black hover:text-white">Services</Link>
+          <Link to="/casestudies" className="py-2 font-medium hover:bg-black hover:text-white">Case Studies</Link>
+          <Link to="/aboutus" className="py-2 font-medium hover:bg-black hover:text-white">About Us</Link>
+          <Link to="/blog" className="py-2 font-medium hover:bg-black hover:text-white">Blog</Link>
+          <Link to="/contactus" className="py-2 font-medium hover:bg-black hover:text-white">Contact Us</Link>
           <div className="mt-4 mx-4 bg-black text-white py-2 rounded font-medium">
             BOOK A CONSULTATION
           </div>
@@ -102,7 +102,7 @@ export default function Navbar() {
 
       {/* CTA Button (Desktop only) */}
          <div className="translate-y-[1px] right-5 g-hov w-[50%] sm:w-[30%] md:w-[16%] h-[60%] z-30 g-hov hidden md:block">
-     <Link to="/dista/contactus/index.html">
+     <Link to="/contactus">
       <div className="button-1"></div>
       <div className="button-2"></div>
      <div className="button-3 flex justify-center items-center text-sm sm:text-base font-medium text-white">BOOK A CONSULTATION</div>

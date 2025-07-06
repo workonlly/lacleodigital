@@ -6,7 +6,7 @@ export interface Maindata {
   id: number
   promo: string
   heading: string
-  keywords: string[]
+  keywords: string[] | string
   secheading: string
   secpara: string
   text: string
@@ -17,7 +17,7 @@ export interface Maindata2 {
   sid: number
   promo: string
   heading: string
-  keywords: string[]
+  keywords: string[] | string
   secheading: string
   secpara: string
   text: string

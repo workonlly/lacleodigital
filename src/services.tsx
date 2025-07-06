@@ -1,7 +1,8 @@
  import useAppData from "./assets/data"
- import Navbar from './header';
+import Navbar from './header';
 import Footer from './footer';
 import "./button.css"
+import { Link } from 'react-router-dom';
 
 function Services() {
   const { data, loading } = useAppData()
@@ -69,9 +70,9 @@ function Services() {
           {children.map((child) => {
             const childImg = data.mainimg.find((img) => img.id === child.sid);
             return (
-              <a
+              <Link
                 key={child.sid}
-                href={`/dista/show/show.html?id=${child.sid}`}
+                to={`/show?id=${child.sid}`}
                 className="flex items-center gap-3 p-4 bg-white rounded-lg shadow-md hover:shadow-lg border border-transparent hover:border-gray-300 transition duration-200"
               >
                 {childImg && (
@@ -85,19 +86,19 @@ function Services() {
                   <h4 className="text-sm font-semibold text-gray-800">{child.promo}</h4>
                   <p className="text-xs text-gray-600">{child.heading}</p>
                 </div>
-              </a>
+              </Link>
             );
           })}
         </div>
 
         {/* Centered Button */}
         <div className="pt-4 text-center">
-          <a
-            href={`/dista/show/show.html?id=${item.id}`}
+          <Link
+            to={`/show?id=${item.id}`}
             className="inline-block text-sm font-medium text-[#4361ee] hover:underline"
           >
             View full details →
-          </a>
+          </Link>
         </div>
       </div>
     );

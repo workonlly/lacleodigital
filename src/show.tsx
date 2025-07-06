@@ -1,88 +1,120 @@
-import useAppData from "./assets/data"
+import useAppData from "./assets/data";
 import Navbar from './header';
 import Footer from './footer';
-import "./button.css"
-import { useSearchParams } from 'react-router-dom';
+import "./button.css";
+import { useSearchParams, Link } from 'react-router-dom';
 
 function Show() {
-    const {data,loading}=useAppData()
-    const [searchParams] = useSearchParams();
-    const id = searchParams.get('id');
-    
-    if(loading) {
-        return (
-            <div>
-                <section className='sticky top-5 z-50'><Navbar/></section>
-                <div className="flex justify-center items-center min-h-screen">
-                    <p>Loading data...</p>
-                </div>
-                <Footer></Footer>
-            </div>
-        )
-    }
+  const { data, loading } = useAppData();
+  const [searchParams] = useSearchParams();
+  const id = searchParams.get("id");
 
-    // Find the item from maindata
-    const mainItem = data.maindata.find(item => item.id === parseInt(id || '0'));
-    
-    // Find sub-items from maindata2
-    const subItems = data.maindata2.filter(subItem => subItem.id === parseInt(id || '0'));
-    
-    // If not found in maindata, check if it's a sub-item
-    const subItem = data.maindata2.find(subItem => subItem.sid === parseInt(id || '0'));
-
+  if (loading) {
     return (
-        <div>
-            <section className='sticky top-5 z-50'><Navbar/></section>
-            
-            <div className="container mx-auto px-4 py-8">
-                {mainItem ? (
-                    <div>
-                        <h1 className="text-3xl font-bold mb-6">{mainItem.promo}</h1>
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                            {subItems.map((subItem) => (
-                                <div key={subItem.sid} className="border rounded-lg p-6 shadow-md">
-                                    <h2 className="text-xl font-semibold mb-4">{subItem.promo}</h2>
-                                    <p className="text-gray-600 mb-4">{subItem.text || 'No description available'}</p>
-                                    <div className="flex justify-between items-center">
-                                        <span className="text-lg font-bold">{subItem.heading || 'Contact for pricing'}</span>
-                                        <button className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
-                                            Learn More
-                                        </button>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                ) : subItem ? (
-                    <div className="max-w-4xl mx-auto">
-                        <h1 className="text-3xl font-bold mb-6">{subItem.promo}</h1>
-                        <div className="bg-white rounded-lg shadow-lg p-8">
-                            <p className="text-gray-600 mb-6">{subItem.text || 'No description available'}</p>
-                            <div className="flex justify-between items-center">
-                                <span className="text-2xl font-bold">{subItem.heading || 'Contact for pricing'}</span>
-                                <button className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 text-lg">
-                                    Get Started
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                ) : (
-                    <div className="text-center py-12">
-                        <h1 className="text-2xl font-bold mb-4">Item Not Found</h1>
-                        <p className="text-gray-600">The requested item could not be found.</p>
-                        <button 
-                            onClick={() => window.history.back()} 
-                            className="mt-4 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
-                        >
-                            Go Back
-                        </button>
-                    </div>
-                )}
-            </div>
-            
-            <Footer></Footer>
+      <div>
+        <section className="sticky top-5 z-50">
+          <Navbar />
+        </section>
+        <div className="flex justify-center items-center min-h-screen">
+          <p>Loading data...</p>
         </div>
-    )
+        <Footer />
+      </div>
+    );
+  }
+
+  const mainItem = data.maindata.find(item => item.id === parseInt(id || "0"));
+  const subItem = data.maindata2.find(sub => sub.sid === parseInt(id || "0"));
+  const subItems = data.maindata2.filter(sub => sub.id === parseInt(id || "0"));
+  const text = mainItem?.text || subItem?.text;
+
+  return (
+    <div>
+      {/* Navbar */}
+      <section className="sticky top-5 z-50">
+        <Navbar />
+      </section>
+
+      {/* Header Section */}
+      <header className="text-center py-8 space-y-2 mt-5 bg-[#4361ee]">
+        <h2 className="text-3xl text-white font-bold">
+          {mainItem?.promo || subItem?.promo}
+        </h2>
+        <h6 className="text-lg text-white">
+          • {mainItem?.keywords || subItem?.keywords}
+        </h6>
+      </header>
+
+      {/* Section Heading & Paragraph */}
+      <section className="container mx-auto px-4 py-8 sm:py-12 space-y-4">
+        <h3 className="text-xl sm:text-2xl font-semibold text-center">
+          {mainItem?.secheading || subItem?.secheading}
+        </h3>
+        <p className="text-center text-base sm:text-lg">
+          {mainItem?.secpara || subItem?.secpara}
+        </p>
+      </section>
+
+      {/* Trusted By Logos */}
+      <section className="bg-[#4361ee] py-10 px-6">
+        <h3 className="text-center text-xl text-white font-semibold mb-5">
+          Trusted by some of the biggest brands
+        </h3>
+        <div className="flex justify-center items-center gap-4 flex-wrap wave-text">
+          {[
+            "binmile", "edureka", "isntamart", "lambdatest", "link", "livespace"
+          ].map((logo, idx) => (
+            <span key={idx} className="w-28 bg-[#4361ee] flex justify-center items-center">
+              <img src={`/img/${logo}-removebg-preview.png`} alt={logo} />
+            </span>
+          ))}
+        </div>
+      </section>
+
+      {/* Rich Text Content Section */}
+      <section className="container mx-auto px-4 py-8 sm:py-12 leading-relaxed content-center prose max-w-4xl">
+        <div
+          dangerouslySetInnerHTML={{ __html: text || "<p>No content available.</p>" }}
+        />
+      </section>
+
+      {/* Sub Items Display */}
+      <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-4 py-10">
+        {subItems.map((item) => {
+          const subImg = data.mainimg.find(img => img.id === item.sid);
+          return (
+            <div
+              key={item.sid}
+              className="bg-white/70 shadow-xl p-4 min-h-[200px] flex flex-col items-center text-center gap-4 rounded-2xl hover:scale-105 transition-transform duration-300 hover:border-2 hover:border-black w-full max-w-sm mx-auto"
+            >
+                             <Link
+                 to={`/show?id=${item.sid}`}
+                 className="flex flex-col items-center gap-4 w-full no-underline"
+               >
+                <div className="rounded-full h-20 w-20 overflow-hidden ">
+                  <img
+                    src={subImg?.imageurl }
+                    alt={item.promo}
+                    className="object-cover w-full h-full rounded-full"
+                  />
+                </div>
+
+                <h3 className="text-xl font-semibold text-black">{item.promo}</h3>
+                <p className="text-sm px-2 text-gray-700">{item.heading}</p>
+
+                                 <span className="text-black px-4 py-1.5 hover:text-white hover:bg-black rounded-full text-sm font-medium transition-all border border-black">
+                   Learn more →
+                 </span>
+               </Link>
+            </div>
+          );
+        })}
+      </section>
+
+      {/* Footer */}
+      <Footer />
+    </div>
+  );
 }
 
-export default Show
+export default Show;

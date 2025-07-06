@@ -1,6 +1,6 @@
 import Home from './home';
 
-
+import Admin from './admin/admin';
 import Services from './services';
 import Blog from './blog';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
@@ -25,7 +25,9 @@ function App() {
         <Route path="/blog" element={<Blog/>} />
         <Route path="/contactus" element={<ContactUs/>} />
         <Route path="/show" element={<Show/>} />
-        {/* Add more routes here */}
+        <Route path="/show" element={<Show/>} />
+        <Route path="/admin" element={<Admin/>} />
+        
       </Routes>
     </Router>
 

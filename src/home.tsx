@@ -3,6 +3,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import useAppData from "./assets/data";
 import Navbar from './header';
 import Footer from './footer';
+import { Link } from 'react-router-dom';
 const logos = [
   { src: '/Amazon-removebg-preview.png', alt: 'Amazon' },
   { src: '/Shopify-removebg-preview.png', alt: 'Shopify' },
@@ -71,18 +72,18 @@ function Home() {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 pt-6">
-            <a
-              href="/dista/contactus/index.html?id=116"
+            <Link
+              to="/contactus"
               className="px-8 py-4 bg-blue-600 text-white rounded-full font-semibold hover:bg-blue-700 transform hover:scale-105 transition-all duration-300 shadow-lg"
             >
               Get Started Today
-            </a>
-            <a
-              href="/dista/services/index.html?id=112"
+            </Link>
+            <Link
+              to="/services"
               className="px-8 py-4 border-2 border-blue-600 text-blue-600 rounded-full font-semibold hover:bg-blue-600 hover:text-white transform hover:scale-105 transition-all duration-300"
             >
               View Our Work
-            </a>
+            </Link>
           </div>
         </div>
 
@@ -112,8 +113,8 @@ function Home() {
       key={item.id}
       className="block bg-white/70 shadow-xl p-4 min-h-[200px] flex flex-col items-center text-center gap-4 rounded-2xl hover:scale-105 transition-transform duration-300 hover:border-2 hover:border-black w-full"
     >
-      <a
-        href={`/dista/show/show.html?id=${item.id}`}
+      <Link
+        to={`/show?id=${item.id}`}
         className="flex flex-col items-center gap-4 w-full no-underline"
       >
         {/* Image */}
@@ -137,7 +138,7 @@ function Home() {
         <span className="text-black px-3 py-1 hover:text-white hover:bg-black rounded-full text-sm font-medium transition">
           Learn more →
         </span>
-      </a>
+      </Link>
     </div>
   );
 })}
