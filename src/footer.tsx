@@ -2,27 +2,27 @@
 const profiles = [
   {
     href: 'https://www.upwork.com/ag/lacleodgital/',
-    src: '/public/imo/Upwork-2-removebg-preview.png',
+    src: '../public/imo/Upwork-2-removebg-preview.png',
     alt: 'Upwork',
   },
   {
     href: 'https://www.freelancer.in/u/lacleodigital',
-    src: '/public/imo/freela-removebg-preview.png',
+    src: '../public/imo/freela-removebg-preview.png',
     alt: 'Freelancer',
   },
   {
     href: 'https://clutch.co/profile/lacleodigital',
-    src: '/public/imo/2223-removebg-preview.png',
+    src: '../public/imo/2223-removebg-preview.png',
     alt: 'Clutch',
   },
   {
     href: 'https://www.guru.com/freelancers/la-cleo-digital',
-    src: '/public/imo/gur-removebg-preview.png',
+    src: '../public/imo/gur-removebg-preview.png',
     alt: 'Guru',
   },
   {
     href: 'https://www.fiverr.com/lacleodigital',
-    src: '/public/imo/fiverrrr-removebg-preview.png',
+    src: '../public/imo/fiverrrr-removebg-preview.png',
     alt: 'Fiverr',
   },
 ];
