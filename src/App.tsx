@@ -1,6 +1,7 @@
+import { useState } from 'react';
 import Home from './home';
-
 import Admin from './admin/admin';
+import LoginPanel from './admin/LoginPanel';
 import Services from './services';
 import Blog from './blog';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
@@ -9,14 +10,11 @@ import Aboutus from './aboutus';
 import ContactUs from './contactus';
 import Show from './show';
 
-
-
-
 function App() {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   return (
-    <>
-     <Router>
+    <Router>
       <Routes>
         <Route path="/" element={<Home/>} />
         <Route path="/services" element={<Services/>} />
@@ -25,14 +23,14 @@ function App() {
         <Route path="/blog" element={<Blog/>} />
         <Route path="/contactus" element={<ContactUs/>} />
         <Route path="/show" element={<Show/>} />
-        <Route path="/show" element={<Show/>} />
-        <Route path="/admin" element={<Admin/>} />
-        
+        <Route path="/admin" element={
+          isAuthenticated
+            ? <Admin onLogout={() => setIsAuthenticated(false)} />
+            : <LoginPanel onLogin={setIsAuthenticated} isAuthenticated={isAuthenticated} />
+        } />
       </Routes>
     </Router>
-
-    </>
-  )
+  );
 }
 
-export default App
+export default App;

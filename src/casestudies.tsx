@@ -1,8 +1,22 @@
 import Navbar from './header';
 import Footer from './footer';
 import "./button.css"
+import Lenis from 'lenis';
+import { useEffect } from 'react';
 
 function Casestudies() {
+  useEffect(() => {
+    const lenis = new Lenis({
+      duration: 0.8,
+      easing: (t) => 1 - Math.pow(1 - t, 3),
+    });
+    function raf(time: number) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
+    return () => lenis.destroy();
+  }, []);
   return (
       <div>
       <section className='sticky top-5 z-50'><Navbar/></section>

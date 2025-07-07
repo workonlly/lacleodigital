@@ -3,8 +3,22 @@ import Navbar from './header';
 import Footer from './footer';
 import "./button.css";
 import { useSearchParams, Link } from 'react-router-dom';
+import Lenis from 'lenis';
+import { useEffect } from 'react';
 
 function Show() {
+  useEffect(() => {
+    const lenis = new Lenis({
+      duration: 0.8,
+      easing: (t) => 1 - Math.pow(1 - t, 3),
+    });
+    function raf(time: number) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
+    return () => lenis.destroy();
+  }, []);
   const { data, loading } = useAppData();
   const [searchParams] = useSearchParams();
   const id = searchParams.get("id");

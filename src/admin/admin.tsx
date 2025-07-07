@@ -2,8 +2,11 @@ import { useState } from "react";
 import useAppData from "../assets/data";
 import { supabase } from "../supabase";
 
+interface AdminProps {
+  onLogout?: () => void;
+}
 
-function Admin() {
+function Admin({ onLogout }: AdminProps) {
   const [tag, setTag] = useState<number>(111);
   const { data, loading } = useAppData();
 
@@ -125,7 +128,16 @@ function Admin() {
   };
 
   return (
-    <div className="w-screen h-screen p-1 bg-black flex gap-1 text-black">
+    <div className="w-screen h-screen p-1 bg-black flex gap-1 text-black relative">
+      {/* Logout Button */}
+      {onLogout && (
+        <button
+          onClick={onLogout}
+          className="absolute top-4 right-4 px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 z-50"
+        >
+          Logout
+        </button>
+      )}
       {/* Sidebar */}
       <aside className="w-1/5 bg-white h-full rounded-sm overflow-y-auto">
         <div className="flex flex-col gap-2 p-2">

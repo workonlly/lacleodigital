@@ -6,6 +6,8 @@ import Navbar from './header';
 import Footer from './footer';
 import ClientReviewsSwiper from './assets/ClientReviewsSwiper';
 import { Link } from 'react-router-dom';
+import Lenis from 'lenis';
+import { useEffect } from 'react';
 
 const logos = [
   { src: '/Amazon-removebg-preview.png', alt: 'Amazon' },
@@ -40,8 +42,35 @@ const logos = [
   ];
 
 function Home() {
+  useEffect(() => {
+    const lenis = new Lenis({
+      duration: 0.8,
+      easing: (t) => 1 - Math.pow(1 - t, 3),
+    });
+    function raf(time: number) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
+    return () => lenis.destroy();
+  }, []);
   const { data,loading}=useAppData()
-  if(loading)  return <p>Loading data...</p>
+  if (loading) return (
+    <div id="loader" className="fixed inset-0 w-screen h-screen flex justify-center items-center z-50 bg-black">
+      <div id="loader-box" className="flex w-screen h-screen justify-center items-center absolute">
+        <div className="text-center">
+          <div className="text-white text-4xl sm:text-6xl md:text-7xl font-bold mb-4 animate-pulse">
+            LaCleo Digital
+          </div>
+          <div className="w-32 h-1 bg-white/30 rounded-full mx-auto overflow-hidden">
+            <div className="w-full h-full bg-white rounded-full animate-pulse"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+  
+  
   return (
     <>
     <section className='sticky top-5 z-50'><Navbar/></section>

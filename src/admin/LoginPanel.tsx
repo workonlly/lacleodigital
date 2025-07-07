@@ -13,7 +13,7 @@ export default function LoginPanel({ onLogin, isAuthenticated }: LoginPanelProps
   const [showPassword, setShowPassword] = useState(false);
   
   // Timeout management
-  const [timeoutMinutes, setTimeoutMinutes] = useState(30); // Default 30 minutes
+  const [timeoutMinutes] = useState(10); // Default 30 minutes
   const [remainingTime, setRemainingTime] = useState(timeoutMinutes * 60); // in seconds
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
   const lastActivityRef = useRef<number>(Date.now());
@@ -140,7 +140,6 @@ export default function LoginPanel({ onLogin, isAuthenticated }: LoginPanelProps
       <div className="bg-white rounded-xl shadow-2xl p-8 w-full max-w-md">
         <div className="text-center mb-8">
           <h1 className="text-3xl font-bold text-gray-900 mb-2">Admin Login</h1>
-          <p className="text-gray-600">Access the content management system</p>
         </div>
 
         <form onSubmit={handleLogin} className="space-y-6">
@@ -188,25 +187,6 @@ export default function LoginPanel({ onLogin, isAuthenticated }: LoginPanelProps
             </div>
           </div>
 
-          {/* Timeout Setting */}
-          <div>
-            <label htmlFor="timeout" className="block text-sm font-medium text-gray-700 mb-2">
-              Session Timeout (minutes)
-            </label>
-            <select
-              id="timeout"
-              value={timeoutMinutes}
-              onChange={(e) => setTimeoutMinutes(parseInt(e.target.value))}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"
-              disabled={isLoading}
-            >
-              <option value={15}>15 minutes</option>
-              <option value={30}>30 minutes</option>
-              <option value={60}>1 hour</option>
-              <option value={120}>2 hours</option>
-            </select>
-          </div>
-
           {/* Error Message */}
           {error && (
             <div className="p-3 bg-red-100 border border-red-300 rounded-lg text-red-700 text-sm">
@@ -231,14 +211,6 @@ export default function LoginPanel({ onLogin, isAuthenticated }: LoginPanelProps
           </button>
         </form>
 
-        {/* Demo Credentials */}
-        <div className="mt-6 p-4 bg-gray-50 rounded-lg">
-          <h3 className="text-sm font-medium text-gray-700 mb-2">Demo Credentials:</h3>
-          <div className="text-xs text-gray-600 space-y-1">
-            <div><strong>Username:</strong> admin</div>
-            <div><strong>Password:</strong> lacleo2024</div>
-          </div>
-        </div>
       </div>
     </div>
   );
