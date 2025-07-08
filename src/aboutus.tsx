@@ -1,10 +1,31 @@
 import Navbar from './header';
 import Footer from './footer';
 import "./button.css"
+import { Helmet } from 'react-helmet-async';
 
 function Aboutus() {
   return (
     <div>
+      <Helmet>
+        <title>About Us | LaCleo Digital - Leading Digital Marketing Agency</title>
+        <meta name="description" content="LaCleo Digital is a leading agency specializing in digital marketing and technology services. We empower businesses to thrive in the digital landscape with innovative solutions." />
+        <meta name="keywords" content="about LaCleo Digital, digital marketing agency, technology services, B2B marketing, innovation" />
+        
+        {/* Open Graph / Facebook */}
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://lacleodigital.com/aboutus" />
+        <meta property="og:title" content="About Us | LaCleo Digital" />
+        <meta property="og:description" content="Leading digital marketing agency specializing in innovative solutions for business growth." />
+        <meta property="og:image" content="/public/Yellow_and_Blue_Clean_and_Minimalist_Tech_Company_Logo__1_-removebg-preview.png" />
+        
+        {/* Twitter */}
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta property="twitter:url" content="https://lacleodigital.com/aboutus" />
+        <meta property="twitter:title" content="About Us | LaCleo Digital" />
+        <meta property="twitter:description" content="Leading digital marketing agency specializing in innovative solutions for business growth." />
+        <meta property="twitter:image" content="/public/Yellow_and_Blue_Clean_and_Minimalist_Tech_Company_Logo__1_-removebg-preview.png" />
+      </Helmet>
+      
       <section className='sticky top-5 z-50'><Navbar/></section>
         
       <header className="text-center py-12 space-y-2 bg-[#4361ee] px-4">

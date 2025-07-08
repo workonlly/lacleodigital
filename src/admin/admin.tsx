@@ -1,12 +1,14 @@
 import { useState } from "react";
 import useAppData from "../assets/data";
 import { supabase } from "../supabase";
+import { Helmet } from 'react-helmet-async';
 
 interface AdminProps {
   onLogout?: () => void;
 }
 
 function Admin({ onLogout }: AdminProps) {
+
   const [tag, setTag] = useState<number>(111);
   const { data, loading } = useAppData();
 
@@ -129,6 +131,26 @@ function Admin({ onLogout }: AdminProps) {
 
   return (
     <div className="w-screen h-screen p-1 bg-black flex gap-1 text-black relative">
+      <Helmet>
+        <title>Admin Dashboard | LaCleo Digital</title>
+        <meta name="description" content="Admin dashboard for managing LaCleo Digital content and services." />
+        <meta name="keywords" content="admin dashboard, content management, LaCleo Digital admin" />
+        
+        {/* Open Graph / Facebook */}
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://lacleodigital.com/admin" />
+        <meta property="og:title" content="Admin Dashboard | LaCleo Digital" />
+        <meta property="og:description" content="Admin dashboard for managing LaCleo Digital content." />
+        <meta property="og:image" content="/public/Yellow_and_Blue_Clean_and_Minimalist_Tech_Company_Logo__1_-removebg-preview.png" />
+        
+        {/* Twitter */}
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta property="twitter:url" content="https://lacleodigital.com/admin" />
+        <meta property="twitter:title" content="Admin Dashboard | LaCleo Digital" />
+        <meta property="twitter:description" content="Admin dashboard for managing LaCleo Digital content." />
+        <meta property="twitter:image" content="/public/Yellow_and_Blue_Clean_and_Minimalist_Tech_Company_Logo__1_-removebg-preview.png" />
+      </Helmet>
+      
       {/* Logout Button */}
       {onLogout && (
         <button

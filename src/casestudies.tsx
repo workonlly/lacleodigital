@@ -3,8 +3,10 @@ import Footer from './footer';
 import "./button.css"
 import Lenis from 'lenis';
 import { useEffect } from 'react';
+import { Helmet } from 'react-helmet-async';
 
 function Casestudies() {
+
   useEffect(() => {
     const lenis = new Lenis({
       duration: 0.8,
@@ -19,6 +21,26 @@ function Casestudies() {
   }, []);
   return (
       <div>
+        <Helmet>
+          <title>Case Studies | LaCleo Digital - Real Results from Our Clients</title>
+          <meta name="description" content="Explore real results and success stories from our clients. See how LaCleo Digital has helped businesses achieve remarkable growth through strategic digital marketing." />
+          <meta name="keywords" content="case studies, client success stories, digital marketing results, B2B marketing success, LaCleo Digital portfolio" />
+          
+          {/* Open Graph / Facebook */}
+          <meta property="og:type" content="website" />
+          <meta property="og:url" content="https://lacleodigital.com/casestudies" />
+          <meta property="og:title" content="Case Studies | LaCleo Digital" />
+          <meta property="og:description" content="Real results and success stories from our clients. See how we help businesses achieve remarkable growth." />
+          <meta property="og:image" content="/public/Yellow_and_Blue_Clean_and_Minimalist_Tech_Company_Logo__1_-removebg-preview.png" />
+          
+          {/* Twitter */}
+          <meta property="twitter:card" content="summary_large_image" />
+          <meta property="twitter:url" content="https://lacleodigital.com/casestudies" />
+          <meta property="twitter:title" content="Case Studies | LaCleo Digital" />
+          <meta property="twitter:description" content="Real results and success stories from our clients. See how we help businesses achieve remarkable growth." />
+          <meta property="twitter:image" content="/public/Yellow_and_Blue_Clean_and_Minimalist_Tech_Company_Logo__1_-removebg-preview.png" />
+        </Helmet>
+        
       <section className='sticky top-5 z-50'><Navbar/></section>
         
       <header className="text-center py-10 sm:py-14 space-y-3 bg-[#4361ee] w-full px-6">

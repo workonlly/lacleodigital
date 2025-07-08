@@ -3,9 +3,11 @@ import Footer from './footer';
 import "./button.css"
 import Lenis from 'lenis';
 import { useEffect } from 'react';
+import { Helmet } from 'react-helmet-async';
 
 
 const ContactUs = () => {
+
   useEffect(() => {
     const lenis = new Lenis({
       duration: 0.8,
@@ -20,6 +22,26 @@ const ContactUs = () => {
   }, []);
   return (
     <div className="w-full">
+      <Helmet>
+        <title>Contact Us | LaCleo Digital - Get In Touch Today</title>
+        <meta name="description" content="Get in touch with LaCleo Digital today. We have offices in India and UAE, available 24/7 to serve businesses globally with digital marketing solutions." />
+        <meta name="keywords" content="contact LaCleo Digital, digital marketing contact, B2B marketing contact, India UAE offices" />
+        
+        {/* Open Graph / Facebook */}
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://lacleodigital.com/contactus" />
+        <meta property="og:title" content="Contact Us | LaCleo Digital" />
+        <meta property="og:description" content="Get in touch with LaCleo Digital today. Available 24/7 to serve businesses globally." />
+        <meta property="og:image" content="/public/Yellow_and_Blue_Clean_and_Minimalist_Tech_Company_Logo__1_-removebg-preview.png" />
+        
+        {/* Twitter */}
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta property="twitter:url" content="https://lacleodigital.com/contactus" />
+        <meta property="twitter:title" content="Contact Us | LaCleo Digital" />
+        <meta property="twitter:description" content="Get in touch with LaCleo Digital today. Available 24/7 to serve businesses globally." />
+        <meta property="twitter:image" content="/public/Yellow_and_Blue_Clean_and_Minimalist_Tech_Company_Logo__1_-removebg-preview.png" />
+      </Helmet>
+      
         <section className='sticky top-5 z-50'><Navbar/></section>
       {/* Header */}
       <header className="text-center py-8 sm:py-10 mt-5 space-y-2 bg-[#4361ee] w-full px-4">

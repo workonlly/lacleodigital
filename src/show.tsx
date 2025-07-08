@@ -5,8 +5,16 @@ import "./button.css";
 import { useSearchParams, Link } from 'react-router-dom';
 import Lenis from 'lenis';
 import { useEffect } from 'react';
+import { Helmet } from 'react-helmet-async';
 
 function Show() {
+  const { data, loading } = useAppData();
+  const [searchParams] = useSearchParams();
+  const id = searchParams.get("id");
+
+  const mainItem = data.maindata.find(item => item.id === parseInt(id || "0"));
+  const subItem = data.maindata2.find(sub => sub.sid === parseInt(id || "0"));
+
   useEffect(() => {
     const lenis = new Lenis({
       duration: 0.8,
@@ -19,9 +27,6 @@ function Show() {
     requestAnimationFrame(raf);
     return () => lenis.destroy();
   }, []);
-  const { data, loading } = useAppData();
-  const [searchParams] = useSearchParams();
-  const id = searchParams.get("id");
 
   if (loading) {
     return (
@@ -37,13 +42,39 @@ function Show() {
     );
   }
 
-  const mainItem = data.maindata.find(item => item.id === parseInt(id || "0"));
-  const subItem = data.maindata2.find(sub => sub.sid === parseInt(id || "0"));
   const subItems = data.maindata2.filter(sub => sub.id === parseInt(id || "0"));
   const text = mainItem?.text || subItem?.text;
 
   return (
     <div>
+      <Helmet>
+        <title>{`${mainItem?.promo || subItem?.promo || 'Service Details'} | LaCleo Digital`}</title>
+        <meta name="description" content={mainItem?.secpara || subItem?.secpara || 'Explore our comprehensive digital marketing services and solutions.'} />
+        <meta name="keywords" content={
+          Array.isArray(mainItem?.keywords)
+            ? mainItem.keywords.join(', ')
+            : mainItem?.keywords ||
+              (Array.isArray(subItem?.keywords)
+                ? subItem.keywords.join(', ')
+                : subItem?.keywords) ||
+              'digital marketing services, B2B marketing, LaCleo Digital'
+        } />
+        
+        {/* Open Graph / Facebook */}
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={`https://lacleodigital.com/show?id=${id}`} />
+        <meta property="og:title" content={`${mainItem?.promo || subItem?.promo || 'Service Details'} | LaCleo Digital`} />
+        <meta property="og:description" content={mainItem?.secpara || subItem?.secpara || 'Explore our comprehensive digital marketing services.'} />
+        <meta property="og:image" content="/public/Yellow_and_Blue_Clean_and_Minimalist_Tech_Company_Logo__1_-removebg-preview.png" />
+        
+        {/* Twitter */}
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta property="twitter:url" content={`https://lacleodigital.com/show?id=${id}`} />
+        <meta property="twitter:title" content={`${mainItem?.promo || subItem?.promo || 'Service Details'} | LaCleo Digital`} />
+        <meta property="twitter:description" content={mainItem?.secpara || subItem?.secpara || 'Explore our comprehensive digital marketing services.'} />
+        <meta property="twitter:image" content="/public/Yellow_and_Blue_Clean_and_Minimalist_Tech_Company_Logo__1_-removebg-preview.png" />
+      </Helmet>
+      
       {/* Navbar */}
       <section className="sticky top-5 z-50">
         <Navbar />

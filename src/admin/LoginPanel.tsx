@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import { Helmet } from 'react-helmet-async';
 
 interface LoginPanelProps {
   onLogin: (isAuthenticated: boolean) => void;
@@ -6,6 +7,7 @@ interface LoginPanelProps {
 }
 
 export default function LoginPanel({ onLogin, isAuthenticated }: LoginPanelProps) {
+
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -137,6 +139,26 @@ export default function LoginPanel({ onLogin, isAuthenticated }: LoginPanelProps
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
+      <Helmet>
+        <title>Admin Login | LaCleo Digital</title>
+        <meta name="description" content="Secure admin login for LaCleo Digital content management." />
+        <meta name="keywords" content="admin login, secure access, LaCleo Digital admin" />
+        
+        {/* Open Graph / Facebook */}
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://lacleodigital.com/admin" />
+        <meta property="og:title" content="Admin Login | LaCleo Digital" />
+        <meta property="og:description" content="Secure admin login for LaCleo Digital content management." />
+        <meta property="og:image" content="/public/Yellow_and_Blue_Clean_and_Minimalist_Tech_Company_Logo__1_-removebg-preview.png" />
+        
+        {/* Twitter */}
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta property="twitter:url" content="https://lacleodigital.com/admin" />
+        <meta property="twitter:title" content="Admin Login | LaCleo Digital" />
+        <meta property="twitter:description" content="Secure admin login for LaCleo Digital content management." />
+        <meta property="twitter:image" content="/public/Yellow_and_Blue_Clean_and_Minimalist_Tech_Company_Logo__1_-removebg-preview.png" />
+      </Helmet>
+      
       <div className="bg-white rounded-xl shadow-2xl p-8 w-full max-w-md">
         <div className="text-center mb-8">
           <h1 className="text-3xl font-bold text-gray-900 mb-2">Admin Login</h1>

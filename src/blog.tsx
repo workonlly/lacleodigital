@@ -1,10 +1,31 @@
 import Navbar from './header';
 import Footer from './footer';
 import "./button.css"
+import { Helmet } from 'react-helmet-async';
 
 function Blog() {
   return (
     <div>
+      <Helmet>
+        <title>Blog | LaCleo Digital - Digital Marketing Insights & Tips</title>
+        <meta name="description" content="Stay updated with the latest digital marketing insights, tips, and industry trends from LaCleo Digital experts." />
+        <meta name="keywords" content="digital marketing blog, marketing insights, industry trends, B2B marketing tips, LaCleo Digital blog" />
+        
+        {/* Open Graph / Facebook */}
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://lacleodigital.com/blog" />
+        <meta property="og:title" content="Blog | LaCleo Digital" />
+        <meta property="og:description" content="Latest digital marketing insights and industry trends from LaCleo Digital experts." />
+        <meta property="og:image" content="/public/Yellow_and_Blue_Clean_and_Minimalist_Tech_Company_Logo__1_-removebg-preview.png" />
+        
+        {/* Twitter */}
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta property="twitter:url" content="https://lacleodigital.com/blog" />
+        <meta property="twitter:title" content="Blog | LaCleo Digital" />
+        <meta property="twitter:description" content="Latest digital marketing insights and industry trends from LaCleo Digital experts." />
+        <meta property="twitter:image" content="/public/Yellow_and_Blue_Clean_and_Minimalist_Tech_Company_Logo__1_-removebg-preview.png" />
+      </Helmet>
+      
     <section className='sticky top-5 z-50'><Navbar/></section>
       
        <header className="text-center py-8 space-y-2 mt-5 bg-[#4361ee]">

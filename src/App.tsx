@@ -9,27 +9,30 @@ import Casestudies from './casestudies';
 import Aboutus from './aboutus';
 import ContactUs from './contactus';
 import Show from './show';
+import { HelmetProvider } from 'react-helmet-async';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Home/>} />
-        <Route path="/services" element={<Services/>} />
-        <Route path="/casestudies" element={<Casestudies/>} />
-        <Route path="/aboutus" element={<Aboutus/>} />
-        <Route path="/blog" element={<Blog/>} />
-        <Route path="/contactus" element={<ContactUs/>} />
-        <Route path="/show" element={<Show/>} />
-        <Route path="/admin" element={
-          isAuthenticated
-            ? <Admin onLogout={() => setIsAuthenticated(false)} />
-            : <LoginPanel onLogin={setIsAuthenticated} isAuthenticated={isAuthenticated} />
-        } />
-      </Routes>
-    </Router>
+    <HelmetProvider>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Home/>} />
+          <Route path="/services" element={<Services/>} />
+          <Route path="/casestudies" element={<Casestudies/>} />
+          <Route path="/aboutus" element={<Aboutus/>} />
+          <Route path="/blog" element={<Blog/>} />
+          <Route path="/contactus" element={<ContactUs/>} />
+          <Route path="/show" element={<Show/>} />
+          <Route path="/admin" element={
+            isAuthenticated
+              ? <Admin onLogout={() => setIsAuthenticated(false)} />
+              : <LoginPanel onLogin={setIsAuthenticated} isAuthenticated={isAuthenticated} />
+          } />
+        </Routes>
+      </Router>
+    </HelmetProvider>
   );
 }
 
