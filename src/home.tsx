@@ -57,6 +57,7 @@ function Home() {
     return () => lenis.destroy();
   }, []);
   const { data,loading}=useAppData()
+  const word=data.mainkey.find((item)=>item.id==111)
   if (loading) return (
     <div id="loader" className="fixed inset-0 w-screen h-screen flex justify-center items-center z-50 bg-black">
       <div id="loader-box" className="flex w-screen h-screen justify-center items-center absolute">
@@ -76,9 +77,9 @@ function Home() {
   return (
     <>
       <Helmet>
-        <title>LaCleo Digital - B2B Lead Generation Specialists | Transform Your Business</title>
-        <meta name="description" content="Transform your business with strategic virtual marketing campaigns and in-depth data analysis. Our dedicated team delivers exceptional results through innovative, tailored strategies." />
-        <meta name="keywords" content="B2B lead generation, digital marketing, sales growth, virtual marketing campaigns, data analysis, business transformation, LaCleo Digital" />
+        <title>{word?.title}</title>
+        <meta name="description" content={word?.description||"Transform your business with strategic virtual marketing campaigns and in-depth data analysis. Our dedicated team delivers exceptional results through innovative, tailored strategies."} />
+        <meta name="keywords" content={Array.isArray(word?.metakeywords) ? word.metakeywords.join(",") : "B2B lead generation, digital marketing, sales growth, virtual marketing campaigns, data analysis, business transformation, LaCleo Digital"} />
         
         {/* Open Graph / Facebook */}
         <meta property="og:type" content="website" />

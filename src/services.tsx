@@ -22,6 +22,7 @@ function Services() {
     return () => lenis.destroy();
   }, []);
   const { data, loading } = useAppData()
+  const word=data.mainkey.find((item)=>item.id==112)
 
   
 
@@ -29,22 +30,22 @@ function Services() {
   return (
     <div>
       <Helmet>
-        <title>Digital Marketing Services | LaCleo Digital - Social Media Marketing & Lead Generation</title>
-        <meta name="description" content="LaCleo Digital offers comprehensive digital marketing services including social media marketing, lead generation, and data-driven strategies to transform your business." />
-        <meta name="keywords" content="digital marketing services, social media marketing, lead generation, B2B marketing, data analysis, marketing strategies" />
+        <title>{word?.title}</title>
+        <meta name="description" content={word?.description||"Transform your business with strategic virtual marketing campaigns and in-depth data analysis. Our dedicated team delivers exceptional results through innovative, tailored strategies."} />
+        <meta name="keywords" content={Array.isArray(word?.metakeywords) ? word.metakeywords.join(",") : "B2B lead generation, digital marketing, sales growth, virtual marketing campaigns, data analysis, business transformation, LaCleo Digital"} />
         
         {/* Open Graph / Facebook */}
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://lacleodigital.com/services" />
-        <meta property="og:title" content="Digital Marketing Services | LaCleo Digital" />
-        <meta property="og:description" content="Comprehensive digital marketing services including social media marketing and lead generation." />
+        <meta property="og:url" content="https://lacleodigital.com/" />
+        <meta property="og:title" content="LaCleo Digital - B2B Lead Generation Specialists" />
+        <meta property="og:description" content="Transform your business with strategic virtual marketing campaigns and in-depth data analysis." />
         <meta property="og:image" content="/public/Yellow_and_Blue_Clean_and_Minimalist_Tech_Company_Logo__1_-removebg-preview.png" />
         
         {/* Twitter */}
         <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:url" content="https://lacleodigital.com/services" />
-        <meta property="twitter:title" content="Digital Marketing Services | LaCleo Digital" />
-        <meta property="twitter:description" content="Comprehensive digital marketing services including social media marketing and lead generation." />
+        <meta property="twitter:url" content="https://lacleodigital.com/" />
+        <meta property="twitter:title" content="LaCleo Digital - B2B Lead Generation Specialists" />
+        <meta property="twitter:description" content="Transform your business with strategic virtual marketing campaigns and in-depth data analysis." />
         <meta property="twitter:image" content="/public/Yellow_and_Blue_Clean_and_Minimalist_Tech_Company_Logo__1_-removebg-preview.png" />
       </Helmet>
       

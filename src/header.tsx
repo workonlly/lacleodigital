@@ -45,11 +45,11 @@ export default function Navbar() {
       {isMobileMenuOpen && (
         <div className="md:hidden absolute top-full left-0 w-full bg-white shadow-md z-40 flex flex-col text-center py-4">
           <Link to="/?id=111" className="py-2 font-medium hover:bg-black hover:text-white">Home</Link>
-          <Link to="/services" className="py-2 font-medium hover:bg-black hover:text-white">Services</Link>
-          <Link to="/casestudies" className="py-2 font-medium hover:bg-black hover:text-white">Case Studies</Link>
-          <Link to="/aboutus" className="py-2 font-medium hover:bg-black hover:text-white">About Us</Link>
-          <Link to="/blog" className="py-2 font-medium hover:bg-black hover:text-white">Blog</Link>
-          <Link to="/contactus" className="py-2 font-medium hover:bg-black hover:text-white">Contact Us</Link>
+          <Link to="/services?id=112" className="py-2 font-medium hover:bg-black hover:text-white">Services</Link>
+          <Link to="/casestudies?id=113" className="py-2 font-medium hover:bg-black hover:text-white">Case Studies</Link>
+          <Link to="/aboutus?id=114" className="py-2 font-medium hover:bg-black hover:text-white">About Us</Link>
+          <Link to="/blog?id=115" className="py-2 font-medium hover:bg-black hover:text-white">Blog</Link>
+          <Link to="/contactus?id=116" className="py-2 font-medium hover:bg-black hover:text-white">Contact Us</Link>
           <div className="mt-4 mx-4 bg-black text-white py-2 rounded font-medium">
             BOOK A CONSULTATION
           </div>
@@ -58,14 +58,14 @@ export default function Navbar() {
 
       {/* Desktop Navigation */}
       <div className="hidden md:flex flex-row items-center gap-3 font-semibold  ">
-        <Link to="/" className="nav-link text-center  py-2 px-4 rounded-md hover:text-white hover:bg-black">
+        <Link to="/?id=111" className="nav-link text-center  py-2 px-4 rounded-md hover:text-white hover:bg-black">
           Home
         </Link>
 
         {/* Dropdown example */}
         <div className="relative group">
   <Link
-    to="/services"
+    to="/services?id=112"
     className="nav-link  py-2 px-4 rounded-md hover:text-white hover:bg-black flex items-center"
   >
     Services
@@ -107,10 +107,10 @@ export default function Navbar() {
   </div>
 </div>
 
-        <Link to="/casestudies" className="nav-link   py-2 px-4 rounded-md hover:text-white hover:bg-black">Case Studies</Link>
-        <Link to="/aboutus" className="nav-link   py-2 px-4 rounded-md hover:text-white hover:bg-black">About Us</Link>
-        <Link to="/blog" className="nav-link   py-2 px-4 rounded-md hover:text-white hover:bg-black">Blog</Link>
-        <Link to="/contactus" className="nav-link   py-2 px-4 rounded-md hover:text-white hover:bg-black">Contact Us</Link>
+        <Link to="/casestudies?id=113" className="nav-link   py-2 px-4 rounded-md hover:text-white hover:bg-black">Case Studies</Link>
+        <Link to="/aboutus?id=114" className="nav-link   py-2 px-4 rounded-md hover:text-white hover:bg-black">About Us</Link>
+        <Link to="/blog?id=115" className="nav-link   py-2 px-4 rounded-md hover:text-white hover:bg-black">Blog</Link>
+        <Link to="/contactus?id=116" className="nav-link   py-2 px-4 rounded-md hover:text-white hover:bg-black">Contact Us</Link>
       </div>
 
       {/* CTA Button (Desktop only) */}

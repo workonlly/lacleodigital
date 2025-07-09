@@ -12,6 +12,13 @@ export interface Maindata {
   text: string
 }
 
+export interface blog{
+  id:number;
+  heading:string;
+  description:string;
+  promo:string;
+  image?: string;
+}
 export interface Maindata2 {
   id: number
   sid: number
@@ -40,6 +47,7 @@ interface AppData {
   maindata2: Maindata2[]
   mainkey: Mainkey[]
   mainimg: Mainimg[]
+  blog:blog[];
 }
 
 const useAppData = () => {
@@ -48,6 +56,7 @@ const useAppData = () => {
     maindata2: [],
     mainkey: [],
     mainimg: [],
+    blog:[],
   })
 
   const [loading, setLoading] = useState(true)
@@ -56,11 +65,12 @@ const useAppData = () => {
     const fetchAll = async () => {
       setLoading(true)
 
-      const [r1, r2, r3, r4] = await Promise.all([
+      const [r1, r2, r3, r4,r5] = await Promise.all([
         supabase.from('maindata').select('*'),
         supabase.from('maindata2').select('*'),
         supabase.from('maindatakeywords').select('*'),
         supabase.from('mainimages').select('*'),
+        supabase.from('blog').select('*'),
       ])
 
       setData({
@@ -68,6 +78,7 @@ const useAppData = () => {
         maindata2: (r2.data || []) as Maindata2[],
         mainkey: (r3.data || []) as Mainkey[],
         mainimg: (r4.data || []) as Mainimg[],
+        blog: (r5.data || []) as blog[],
       })
 
       setLoading(false)

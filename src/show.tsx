@@ -11,6 +11,7 @@ function Show() {
   const { data, loading } = useAppData();
   const [searchParams] = useSearchParams();
   const id = searchParams.get("id");
+  const word=data.mainkey.find((item)=>item.id==parseInt(id || "0"))
 
   const mainItem = data.maindata.find(item => item.id === parseInt(id || "0"));
   const subItem = data.maindata2.find(sub => sub.sid === parseInt(id || "0"));
@@ -47,31 +48,23 @@ function Show() {
 
   return (
     <div>
-      <Helmet>
-        <title>{`${mainItem?.promo || subItem?.promo || 'Service Details'} | LaCleo Digital`}</title>
-        <meta name="description" content={mainItem?.secpara || subItem?.secpara || 'Explore our comprehensive digital marketing services and solutions.'} />
-        <meta name="keywords" content={
-          Array.isArray(mainItem?.keywords)
-            ? mainItem.keywords.join(', ')
-            : mainItem?.keywords ||
-              (Array.isArray(subItem?.keywords)
-                ? subItem.keywords.join(', ')
-                : subItem?.keywords) ||
-              'digital marketing services, B2B marketing, LaCleo Digital'
-        } />
+     <Helmet>
+        <title>{word?.title}</title>
+        <meta name="description" content={word?.description||"Transform your business with strategic virtual marketing campaigns and in-depth data analysis. Our dedicated team delivers exceptional results through innovative, tailored strategies."} />
+        <meta name="keywords" content={Array.isArray(word?.metakeywords) ? word.metakeywords.join(",") : "B2B lead generation, digital marketing, sales growth, virtual marketing campaigns, data analysis, business transformation, LaCleo Digital"} />
         
         {/* Open Graph / Facebook */}
         <meta property="og:type" content="website" />
-        <meta property="og:url" content={`https://lacleodigital.com/show?id=${id}`} />
-        <meta property="og:title" content={`${mainItem?.promo || subItem?.promo || 'Service Details'} | LaCleo Digital`} />
-        <meta property="og:description" content={mainItem?.secpara || subItem?.secpara || 'Explore our comprehensive digital marketing services.'} />
+        <meta property="og:url" content="https://lacleodigital.com/" />
+        <meta property="og:title" content="LaCleo Digital - B2B Lead Generation Specialists" />
+        <meta property="og:description" content="Transform your business with strategic virtual marketing campaigns and in-depth data analysis." />
         <meta property="og:image" content="/public/Yellow_and_Blue_Clean_and_Minimalist_Tech_Company_Logo__1_-removebg-preview.png" />
         
         {/* Twitter */}
         <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:url" content={`https://lacleodigital.com/show?id=${id}`} />
-        <meta property="twitter:title" content={`${mainItem?.promo || subItem?.promo || 'Service Details'} | LaCleo Digital`} />
-        <meta property="twitter:description" content={mainItem?.secpara || subItem?.secpara || 'Explore our comprehensive digital marketing services.'} />
+        <meta property="twitter:url" content="https://lacleodigital.com/" />
+        <meta property="twitter:title" content="LaCleo Digital - B2B Lead Generation Specialists" />
+        <meta property="twitter:description" content="Transform your business with strategic virtual marketing campaigns and in-depth data analysis." />
         <meta property="twitter:image" content="/public/Yellow_and_Blue_Clean_and_Minimalist_Tech_Company_Logo__1_-removebg-preview.png" />
       </Helmet>
       

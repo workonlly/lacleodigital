@@ -4,9 +4,12 @@ import "./button.css"
 import Lenis from 'lenis';
 import { useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
+import useAppData from './assets/data';
 
 
 const ContactUs = () => {
+  const { data, loading } = useAppData()
+  const word=data.mainkey.find((item)=>item.id==116)
 
   useEffect(() => {
     const lenis = new Lenis({
@@ -23,22 +26,22 @@ const ContactUs = () => {
   return (
     <div className="w-full">
       <Helmet>
-        <title>Contact Us | LaCleo Digital - Get In Touch Today</title>
-        <meta name="description" content="Get in touch with LaCleo Digital today. We have offices in India and UAE, available 24/7 to serve businesses globally with digital marketing solutions." />
-        <meta name="keywords" content="contact LaCleo Digital, digital marketing contact, B2B marketing contact, India UAE offices" />
+        <title>{word?.title}</title>
+        <meta name="description" content={word?.description||"Transform your business with strategic virtual marketing campaigns and in-depth data analysis. Our dedicated team delivers exceptional results through innovative, tailored strategies."} />
+        <meta name="keywords" content={Array.isArray(word?.metakeywords) ? word.metakeywords.join(",") : "B2B lead generation, digital marketing, sales growth, virtual marketing campaigns, data analysis, business transformation, LaCleo Digital"} />
         
         {/* Open Graph / Facebook */}
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://lacleodigital.com/contactus" />
-        <meta property="og:title" content="Contact Us | LaCleo Digital" />
-        <meta property="og:description" content="Get in touch with LaCleo Digital today. Available 24/7 to serve businesses globally." />
+        <meta property="og:url" content="https://lacleodigital.com/" />
+        <meta property="og:title" content="LaCleo Digital - B2B Lead Generation Specialists" />
+        <meta property="og:description" content="Transform your business with strategic virtual marketing campaigns and in-depth data analysis." />
         <meta property="og:image" content="/public/Yellow_and_Blue_Clean_and_Minimalist_Tech_Company_Logo__1_-removebg-preview.png" />
         
         {/* Twitter */}
         <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:url" content="https://lacleodigital.com/contactus" />
-        <meta property="twitter:title" content="Contact Us | LaCleo Digital" />
-        <meta property="twitter:description" content="Get in touch with LaCleo Digital today. Available 24/7 to serve businesses globally." />
+        <meta property="twitter:url" content="https://lacleodigital.com/" />
+        <meta property="twitter:title" content="LaCleo Digital - B2B Lead Generation Specialists" />
+        <meta property="twitter:description" content="Transform your business with strategic virtual marketing campaigns and in-depth data analysis." />
         <meta property="twitter:image" content="/public/Yellow_and_Blue_Clean_and_Minimalist_Tech_Company_Logo__1_-removebg-preview.png" />
       </Helmet>
       

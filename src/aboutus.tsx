@@ -2,27 +2,30 @@ import Navbar from './header';
 import Footer from './footer';
 import "./button.css"
 import { Helmet } from 'react-helmet-async';
+import useAppData from './assets/data';
 
 function Aboutus() {
+  const { data, loading } = useAppData()
+  const word=data.mainkey.find((item)=>item.id==114)
   return (
     <div>
-      <Helmet>
-        <title>About Us | LaCleo Digital - Leading Digital Marketing Agency</title>
-        <meta name="description" content="LaCleo Digital is a leading agency specializing in digital marketing and technology services. We empower businesses to thrive in the digital landscape with innovative solutions." />
-        <meta name="keywords" content="about LaCleo Digital, digital marketing agency, technology services, B2B marketing, innovation" />
+     <Helmet>
+        <title>{word?.title}</title>
+        <meta name="description" content={word?.description||"Transform your business with strategic virtual marketing campaigns and in-depth data analysis. Our dedicated team delivers exceptional results through innovative, tailored strategies."} />
+        <meta name="keywords" content={Array.isArray(word?.metakeywords) ? word.metakeywords.join(",") : "B2B lead generation, digital marketing, sales growth, virtual marketing campaigns, data analysis, business transformation, LaCleo Digital"} />
         
         {/* Open Graph / Facebook */}
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://lacleodigital.com/aboutus" />
-        <meta property="og:title" content="About Us | LaCleo Digital" />
-        <meta property="og:description" content="Leading digital marketing agency specializing in innovative solutions for business growth." />
+        <meta property="og:url" content="https://lacleodigital.com/" />
+        <meta property="og:title" content="LaCleo Digital - B2B Lead Generation Specialists" />
+        <meta property="og:description" content="Transform your business with strategic virtual marketing campaigns and in-depth data analysis." />
         <meta property="og:image" content="/public/Yellow_and_Blue_Clean_and_Minimalist_Tech_Company_Logo__1_-removebg-preview.png" />
         
         {/* Twitter */}
         <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:url" content="https://lacleodigital.com/aboutus" />
-        <meta property="twitter:title" content="About Us | LaCleo Digital" />
-        <meta property="twitter:description" content="Leading digital marketing agency specializing in innovative solutions for business growth." />
+        <meta property="twitter:url" content="https://lacleodigital.com/" />
+        <meta property="twitter:title" content="LaCleo Digital - B2B Lead Generation Specialists" />
+        <meta property="twitter:description" content="Transform your business with strategic virtual marketing campaigns and in-depth data analysis." />
         <meta property="twitter:image" content="/public/Yellow_and_Blue_Clean_and_Minimalist_Tech_Company_Logo__1_-removebg-preview.png" />
       </Helmet>
       

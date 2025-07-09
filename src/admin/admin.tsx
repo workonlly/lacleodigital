@@ -2,6 +2,7 @@ import { useState } from "react";
 import useAppData from "../assets/data";
 import { supabase } from "../supabase";
 import { Helmet } from 'react-helmet-async';
+import UseBucketFiles from "../assets/blogimg";
 
 interface AdminProps {
   onLogout?: () => void;
@@ -11,8 +12,12 @@ function Admin({ onLogout }: AdminProps) {
 
   const [tag, setTag] = useState<number>(111);
   const { data, loading } = useAppData();
+  const { data: images, loading: imagesLoading, error } = UseBucketFiles();
 
   const [updates, setUpdates] = useState<{ [key: string]: string }>({});
+  const [newBlog, setNewBlog] = useState({ heading: '', description: '', image: '' });
+  const [newBlogImageFile, setNewBlogImageFile] = useState<File | null>(null);
+  const [showNewBlogForm, setShowNewBlogForm] = useState(false);
 
   if (loading) return <p className="text-center text-white">Loading data...</p>;
 
@@ -299,6 +304,147 @@ function Admin({ onLogout }: AdminProps) {
                  ))}
                </div>
              )}
+            {tag == 115 && data.blog && (
+  <div className="mb-8 p-4 border rounded-lg bg-gray-50">
+    <button
+      className="mb-4 px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700"
+      onClick={() => setShowNewBlogForm(true)}
+    >
+      + Add New Blog Post
+    </button>
+    {showNewBlogForm && (
+      <div className="mb-8 p-4 border rounded-lg bg-white">
+        <h4 className="text-lg font-bold mb-2">New Blog Post</h4>
+        <label className="font-semibold text-gray-700">Image</label>
+        <input
+          type="file"
+          accept="image/*"
+          onChange={e => setNewBlogImageFile(e.target.files?.[0] || null)}
+          className="w-full mt-1 p-2 border rounded"
+        />
+        <label className="font-semibold text-gray-700 mt-4">Heading</label>
+        <input
+          type="text"
+          value={newBlog.heading}
+          onChange={e => setNewBlog({ ...newBlog, heading: e.target.value })}
+          className="w-full mt-1 p-2 border rounded"
+        />
+        <label className="font-semibold text-gray-700 mt-4">Description</label>
+        <textarea
+          rows={6}
+          value={newBlog.description}
+          onChange={e => setNewBlog({ ...newBlog, description: e.target.value })}
+          className="w-full mt-1 p-2 border rounded"
+        />
+        <div className="flex gap-2 mt-3">
+          <button
+            className="px-3 py-1 bg-green-600 text-white rounded hover:bg-green-700"
+            onClick={async () => {
+              let imageUrl = '';
+              if (newBlogImageFile) {
+                const filePath = `blog/${Date.now()}_${newBlogImageFile.name}`;
+                const { error } = await supabase.storage.from('blog').upload(filePath, newBlogImageFile, { upsert: true });
+                if (!error) {
+                  const { data: urlData } = supabase.storage.from('blog').getPublicUrl(filePath);
+                  imageUrl = urlData.publicUrl;
+                }
+              }
+              // Insert into Supabase
+              const { error: insertError } = await supabase.from('blog').insert([{
+                heading: newBlog.heading,
+                description: newBlog.description,
+                image: imageUrl,
+                promo: '', // or any default value
+              }]);
+              if (!insertError) {
+                setShowNewBlogForm(false);
+                setNewBlog({ heading: '', description: '', image: '' });
+                setNewBlogImageFile(null);
+                // Optionally: refetch your data here
+              } else {
+                alert('Failed to add blog post!');
+              }
+            }}
+          >
+            Add Blog Post
+          </button>
+          <button
+            className="px-3 py-1 bg-gray-300 text-gray-800 rounded hover:bg-gray-400"
+            onClick={() => setShowNewBlogForm(false)}
+          >
+            Cancel
+          </button>
+        </div>
+      </div>
+    )}
+    <h3 className="text-xl font-bold mb-4">Edit Blog Posts</h3>
+      {data.blog.map((item, index) => (
+        <div key={item.id} className="mb-8 p-4 border rounded-lg bg-white">
+          <label className="font-semibold text-gray-700">Heading</label>
+          <input
+            type="text"
+            value={updates[`heading_${item.id}`] ?? item.heading}
+            onChange={e => handleInputChange(`heading_${item.id}`, e.target.value)}
+            className="w-full mt-1 p-2 border rounded"
+          />
+          <button
+            onClick={() => handleUpdate(`heading_${item.id}`, updates[`heading_${item.id}`] ?? item.heading)}
+            className="mt-1 px-3 py-1 bg-black text-white rounded hover:bg-gray-800"
+          >
+            Update Heading
+          </button>
+
+          <label className="font-semibold text-gray-700 mt-4">Description (HTML allowed)</label>
+          <textarea
+            rows={6}
+            value={updates[`description_${item.id}`] ?? item.description}
+            onChange={e => handleInputChange(`description_${item.id}`, e.target.value)}
+            className="w-full mt-1 p-2 border rounded"
+          />
+          <button
+            onClick={() => handleUpdate(`description_${item.id}`, updates[`description_${item.id}`] ?? item.description)}
+            className="mt-1 px-3 py-1 bg-black text-white rounded hover:bg-gray-800"
+          >
+            Update Description
+          </button>
+
+          <label className="font-semibold text-gray-700 mt-4">Image</label>
+          {/* Show current image if available */}
+          {images && images[index] && (
+            <div className="mb-2">
+              <img src={images[index]} alt="Blog" className="h-24 rounded" />
+            </div>
+          )}
+          <input
+            type="file"
+            accept="image/*"
+            onChange={async (e) => {
+              const file = e.target.files?.[0];
+              if (!file) return;
+              // Upload to Supabase Storage
+              const filePath = `blog/${item.id}_${file.name}`;
+              const { data, error } = await supabase.storage.from('blog').upload(filePath, file, { upsert: true });
+              if (!error) {
+                // Get public URL
+                const { data: urlData } = supabase.storage.from('blog').getPublicUrl(filePath);
+                // Save the new image URL to your blog post
+                handleUpdate(`image_${item.id}`, urlData.publicUrl);
+              } else {
+                alert('Image upload failed!');
+              }
+            }}
+            className="w-full mt-1 p-2 border rounded"
+          />
+          <button
+            className="mt-1 px-3 py-1 bg-black text-white rounded hover:bg-gray-800"
+            onClick={() => handleUpdate(`image_${item.id}`, updates[`image_${item.id}`] ?? item.image)}
+          >
+            Update Image
+          </button>
+        </div>
+      ))}
+    </div>
+  )}
 
                           {/* MainData Editing */}
              {selectedItems.length > 0 && (
@@ -533,6 +679,8 @@ function Admin({ onLogout }: AdminProps) {
                     Update Keywords
                   </button>
                 </div>
+                
+
 
                 {/* Display IDs for reference */}
                 <div className="mt-4 pt-4 border-t border-gray-200">
