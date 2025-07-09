@@ -4,21 +4,9 @@ import { Link } from "react-router-dom";
 import useAppData from "./assets/data";
 export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const { data,loading}=useAppData()
-  if (loading) return (
-    <div id="loader" className="fixed inset-0 w-screen h-screen flex justify-center items-center z-50 bg-black">
-      <div id="loader-box" className="flex w-screen h-screen justify-center items-center absolute">
-        <div className="text-center">
-          <div className="text-white text-4xl sm:text-6xl md:text-7xl font-bold mb-4 animate-pulse">
-            LaCleo Digital
-          </div>
-          <div className="w-32 h-1 bg-white/30 rounded-full mx-auto overflow-hidden">
-            <div className="w-full h-full bg-white rounded-full animate-pulse"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  )
+  const { data}=useAppData()
+
+  
 
   return (
     <header className="relative flex flex-row justify-between items-center h-20 mx-4 bg-white md:rounded-md">

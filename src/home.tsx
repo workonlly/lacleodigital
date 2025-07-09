@@ -7,8 +7,13 @@ import Footer from './footer';
 import ClientReviewsSwiper from './assets/ClientReviewsSwiper';
 import { Link } from 'react-router-dom';
 import Lenis from 'lenis';
-import { useEffect } from 'react';
+import { useEffect,  useState } from 'react';
 import { Helmet } from 'react-helmet-async';
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
+
+gsap.registerPlugin(ScrollTrigger)
 
 const logos = [
   { src: '/Amazon-removebg-preview.png', alt: 'Amazon' },
@@ -43,66 +48,194 @@ const logos = [
   ];
 
 function Home() {
+  const [showContent, setShowContent] = useState(false);
+
+  const { data, loading } = useAppData();
+  const word=data.mainkey.find((item)=>item.id==111)
 
   useEffect(() => {
+    if (loading) return;
+    // ✅ Initialize Lenis smooth scrolling
     const lenis = new Lenis({
-      duration: 0.8,
+      duration: 1.2,
       easing: (t) => 1 - Math.pow(1 - t, 3),
-    });
+    })
+
+    // Smooth scroll animation loop
     function raf(time: number) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
+      lenis.raf(time)
+      requestAnimationFrame(raf)
     }
-    requestAnimationFrame(raf);
-    return () => lenis.destroy();
-  }, []);
-  const { data,loading}=useAppData()
-  const word=data.mainkey.find((item)=>item.id==111)
-  if (loading) return (
-    <div id="loader" className="fixed inset-0 w-screen h-screen flex justify-center items-center z-50 bg-black">
-      <div id="loader-box" className="flex w-screen h-screen justify-center items-center absolute">
-        <div className="text-center">
-          <div className="text-white text-4xl sm:text-6xl md:text-7xl font-bold mb-4 animate-pulse">
-            LaCleo Digital
-          </div>
-          <div className="w-32 h-1 bg-white/30 rounded-full mx-auto overflow-hidden">
-            <div className="w-full h-full bg-white rounded-full animate-pulse"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  )
+    requestAnimationFrame(raf)
+
+    // ✅ Sync Lenis with ScrollTrigger
+    ScrollTrigger.scrollerProxy(window, {
+      scrollTop(value) {
+        return value !== undefined ? window.scrollTo(0, value) : window.scrollY
+      },
+      getBoundingClientRect() {
+        return {
+          top: 0,
+          left: 0,
+          width: window.innerWidth,
+          height: window.innerHeight,
+        }
+      },
+    })
+
+    ScrollTrigger.addEventListener('refresh', () => lenis.raf(Date.now()))
+    ScrollTrigger.refresh()
+
+    // ✅ GSAP Timeline
+    const loader = document.getElementById("loader");
+    const mainTL = gsap.timeline();
+    mainTL
+      .to("#loader-box", {
+        duration: 1,
+        delay: 0.5,
+        ease: "power2.out",
+      })
+      .to("#loader-box", {
+        duration: 1,
+        opacity: 0,
+        ease: "power2.inOut",
+      })
+      .to("#loader", {
+        duration: 1,
+        y: "-100%",
+        ease: "power2.inOut",
+        onComplete: () => {
+          if (loader) loader.style.display = "none";
+          setShowContent(true);
+        },
+      })
+      // (do not include main content entrance GSAP here)
+  }, [loading]);
+
+  useEffect(() => {
+    if (!showContent) return;
+    // Main content entrance timeline (after loader)
+    const tl = gsap.timeline();
+    tl.from("#nav", {
+      y: -100,
+      opacity: 0,
+      duration: 1,
+      ease: "power3.out"
+    })
+    .from("#herotext", {
+      y: 40,
+      opacity: 0,
+      duration: 0.8,
+      ease: "power3.out"
+    }, "+=0.1")
+    .from("#herovideo", {
+      x: 110,
+      opacity: 0,
+      duration: 0.9,
+      ease: "power3.out"
+    }, "-=0.5")
+    .from("#services", {
+      y: 60,
+      opacity: 0,
+      duration: 1,
+      ease: "power3.out"
+    }, "-=0.4")
+    .from("#texti", {
+      y: 60,
+      opacity: 0,
+      duration: 1,
+      ease: "power3.out"
+    }, "-=0.4")
+    ;
+
+    // Typewriter
+    document.querySelectorAll(".typewriter").forEach((element, index) => {
+      const el = element as HTMLElement;
+      el.style.width = "0";
+      el.style.overflow = "hidden";
+      el.style.whiteSpace = "nowrap";
+      gsap.to(el, {
+        width: el.scrollWidth + "px",
+        duration: 2,
+        delay: 1.2 + (index * 0.4),
+        ease: "power2.inOut"
+      });
+    });
+  
+    // ScrollTrigger fade-in for .fade-in elements
+    document.querySelectorAll(".fade-in").forEach((el) => {
+      gsap.from(el, {
+        scrollTrigger: {
+          trigger: el,
+          start: "top 85%",
+        },
+        opacity: 0,
+        y: 50,
+        duration: 1,
+        ease: "power2.out",
+      });
+    });
+    // Section reveals for #why-choose-us
+    gsap.from("#why-choose-us", {
+      scrollTrigger: {
+        trigger: "#why-choose-us",
+        start: "top 85%",
+      },
+      y: 60,
+      opacity: 0,
+      duration: 1,
+      ease: "power2.out"
+    });
+    // Cleanup for this effect
+    return () => {
+      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+    };
+  }, [showContent]);
+
   
   
   return (
     <>
-      <Helmet>
-        <title>{word?.title}</title>
-        <meta name="description" content={word?.description||"Transform your business with strategic virtual marketing campaigns and in-depth data analysis. Our dedicated team delivers exceptional results through innovative, tailored strategies."} />
-        <meta name="keywords" content={Array.isArray(word?.metakeywords) ? word.metakeywords.join(",") : "B2B lead generation, digital marketing, sales growth, virtual marketing campaigns, data analysis, business transformation, LaCleo Digital"} />
-        
-        {/* Open Graph / Facebook */}
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://lacleodigital.com/" />
-        <meta property="og:title" content="LaCleo Digital - B2B Lead Generation Specialists" />
-        <meta property="og:description" content="Transform your business with strategic virtual marketing campaigns and in-depth data analysis." />
-        <meta property="og:image" content="/public/Yellow_and_Blue_Clean_and_Minimalist_Tech_Company_Logo__1_-removebg-preview.png" />
-        
-        {/* Twitter */}
-        <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:url" content="https://lacleodigital.com/" />
-        <meta property="twitter:title" content="LaCleo Digital - B2B Lead Generation Specialists" />
-        <meta property="twitter:description" content="Transform your business with strategic virtual marketing campaigns and in-depth data analysis." />
-        <meta property="twitter:image" content="/public/Yellow_and_Blue_Clean_and_Minimalist_Tech_Company_Logo__1_-removebg-preview.png" />
-      </Helmet>
-      
-      <section className='sticky top-5 z-50'><Navbar/></section>
+      <div id="loader" className="fixed inset-0 w-screen h-screen flex justify-center items-center z-50 bg-black">
+        <div id="loader-box" className="flex w-screen h-screen justify-center items-center absolute">
+          <div className="text-center">
+            <div className="text-white text-4xl sm:text-6xl md:text-7xl font-bold mb-4 animate-pulse">
+              LaCleo Digital
+            </div>
+            <div className="w-32 h-1 bg-white/30 rounded-full mx-auto overflow-hidden">
+              <div className="w-full h-full bg-white rounded-full animate-pulse"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {showContent && (
+        <>
+          <Helmet>
+            <title>{word?.title}</title>
+            <meta name="description" content={word?.description||"Transform your business with strategic virtual marketing campaigns and in-depth data analysis. Our dedicated team delivers exceptional results through innovative, tailored strategies."} />
+            <meta name="keywords" content={Array.isArray(word?.metakeywords) ? word.metakeywords.join(",") : "B2B lead generation, digital marketing, sales growth, virtual marketing campaigns, data analysis, business transformation, LaCleo Digital"} />
+            
+            {/* Open Graph / Facebook */}
+            <meta property="og:type" content="website" />
+            <meta property="og:url" content="https://lacleodigital.com/" />
+            <meta property="og:title" content="LaCleo Digital - B2B Lead Generation Specialists" />
+            <meta property="og:description" content="Transform your business with strategic virtual marketing campaigns and in-depth data analysis." />
+            <meta property="og:image" content="/public/Yellow_and_Blue_Clean_and_Minimalist_Tech_Company_Logo__1_-removebg-preview.png" />
+            
+            {/* Twitter */}
+            <meta property="twitter:card" content="summary_large_image" />
+            <meta property="twitter:url" content="https://lacleodigital.com/" />
+            <meta property="twitter:title" content="LaCleo Digital - B2B Lead Generation Specialists" />
+            <meta property="twitter:description" content="Transform your business with strategic virtual marketing campaigns and in-depth data analysis." />
+            <meta property="twitter:image" content="/public/Yellow_and_Blue_Clean_and_Minimalist_Tech_Company_Logo__1_-removebg-preview.png" />
+          </Helmet>
+          <section id='nav' className='sticky top-5 z-50'><Navbar/></section>
     <section className="relative min-h-screen flex items-center overflow-hidden mt-10">
       <div className="container mx-auto px-4 md:px-8 flex flex-col lg:flex-row items-center gap-12">
         
         {/* Hero Text */}
         <div className="flex-1 text-center lg:text-left space-y-6" id="hero-text">
-          <div className="space-y-4">
+          <div id='herotext' className="space-y-4">
             <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold text-gray-900 leading-tight">
               <span className="inline-block wave-text text-blue-600">
                 <span>B</span>
@@ -113,15 +246,15 @@ function Home() {
             <h2 className="text-4xl md:text-6xl lg:text-7xl font-bold text-gray-900 typewriter">
               Lead Generation
             </h2>
-            <h3 className="text-4xl md:text-6xl lg:text-7xl font-bold text-gray-900">
+            <h3 className="text-4xl md:text-6xl lg:text-7xl font-bold text-gray-900 typewriter">
               Specialists
             </h3>
-            <p className="text-2xl md:text-4xl font-semibold text-green-600 animate-bounce">
+            <p className="text-2xl md:text-4xl font-semibold text-green-600 animate-bounce typewriter">
               For Sales Growth
             </p>
           </div>
 
-          <p className="text-lg md:text-xl text-gray-700 max-w-2xl leading-relaxed">
+          <p id='texti' className="text-lg md:text-xl text-gray-700 max-w-2xl leading-relaxed  ">
             Transform your business with strategic virtual marketing campaigns and in-depth data analysis. 
             Our dedicated team delivers exceptional results through innovative, tailored strategies.
           </p>
@@ -143,7 +276,7 @@ function Home() {
         </div>
 
         {/* Hero Video */}
-        <div className="flex-1 flex justify-center" id="hero-video">
+        <div id="herovideo" className="flex-1 flex justify-center">
           <div className="relative group">
             <div className="absolute -inset-4 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl blur opacity-30 group-hover:opacity-50 transition duration-300"></div>
             <video
@@ -159,7 +292,7 @@ function Home() {
 
       </div>
     </section>
-   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 p-10">
+   <div id='services' className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 p-10">
     {data.maindata.map((item) => {
   const imgItem = data.mainimg.find((stem) => stem.id === item.id);
 
@@ -398,7 +531,9 @@ function Home() {
       <ClientReviewsSwiper />
     </div>
     <Footer></Footer>
-     </>
+        </>
+      )}
+    </>
   )
 }
 
