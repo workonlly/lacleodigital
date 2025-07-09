@@ -38,9 +38,10 @@ export default function Navbar() {
           <Link to="/aboutus?id=114" className="py-2 font-medium hover:bg-black hover:text-white">About Us</Link>
           <Link to="/blog?id=115" className="py-2 font-medium hover:bg-black hover:text-white">Blog</Link>
           <Link to="/contactus?id=116" className="py-2 font-medium hover:bg-black hover:text-white">Contact Us</Link>
+          <Link to="/contactus">
           <div className="mt-4 mx-4 bg-black text-white py-2 rounded font-medium">
             BOOK A CONSULTATION
-          </div>
+          </div></Link>
         </div>
       )}
 
