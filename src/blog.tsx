@@ -7,9 +7,9 @@ import  UseBucketFiles from './assets/blogimg';
 import { useState } from 'react';
 
 function Blog() {
-  const { data, loading: appLoading } = useAppData();
+  const { data, loading: _appLoading } = useAppData();
   const word=data.mainkey.find((item)=>item.id==115)
-  const { data: images, loading: imagesLoading, error } = UseBucketFiles();
+  const { data: images, loading: _imagesLoading, error: _error } = UseBucketFiles();
   const [selectedPost, setSelectedPost] = useState<any>(null);
   const [modalOpen, setModalOpen] = useState(false);
   return (

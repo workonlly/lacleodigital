@@ -12,7 +12,7 @@ function Admin({ onLogout }: AdminProps) {
 
   const [tag, setTag] = useState<number>(111);
   const { data, loading } = useAppData();
-  const { data: images, loading: imagesLoading, error } = UseBucketFiles();
+  const { data: images, loading: _imagesLoading, error: _error } = UseBucketFiles();
 
   const [updates, setUpdates] = useState<{ [key: string]: string }>({});
   const [newBlog, setNewBlog] = useState({ heading: '', description: '', image: '' });
@@ -423,7 +423,7 @@ function Admin({ onLogout }: AdminProps) {
               if (!file) return;
               // Upload to Supabase Storage
               const filePath = `blog/${item.id}_${file.name}`;
-              const { data, error } = await supabase.storage.from('blog').upload(filePath, file, { upsert: true });
+              const { data: _data, error: error } = await supabase.storage.from('blog').upload(filePath, file, { upsert: true });
               if (!error) {
                 // Get public URL
                 const { data: urlData } = supabase.storage.from('blog').getPublicUrl(filePath);

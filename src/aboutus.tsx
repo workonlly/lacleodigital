@@ -5,7 +5,7 @@ import { Helmet } from 'react-helmet-async';
 import useAppData from './assets/data';
 
 function Aboutus() {
-  const { data, loading } = useAppData()
+  const { data, loading: _loading } = useAppData()
   const word=data.mainkey.find((item)=>item.id==114)
   return (
     <div>

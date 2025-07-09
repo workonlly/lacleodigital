@@ -8,7 +8,7 @@ import useAppData from './assets/data';
 
 
 const ContactUs = () => {
-  const { data, loading } = useAppData()
+  const { data, loading: _loading } = useAppData()
   const word=data.mainkey.find((item)=>item.id==116)
 
   useEffect(() => {
