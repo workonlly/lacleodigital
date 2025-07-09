@@ -420,8 +420,8 @@ function Home() {
       <div className="max-w-7xl mx-auto">
         {/* Features Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-          <div className="text-center p-8 bg-blue-50 rounded-xl hover:shadow-lg transition-shadow">
-            <div className="w-16 h-16 bg-[#4361ee] rounded-full flex items-center justify-center mx-auto mb-4">
+          <div className="text-center p-8 bg-blue-50 rounded-xl hover:shadow-2xl hover:-translate-y-2 hover:bg-blue-100 transition-all duration-300 cursor-pointer">
+            <div className="w-16 h-16 bg-[#4361ee] rounded-full flex items-center justify-center mx-auto mb-4 transition-transform duration-300 group-hover:scale-110">
               <span className="text-white text-2xl">🎯</span>
             </div>
             <h3 className="text-xl font-semibold mb-3 text-gray-900">Targeted Approach</h3>
@@ -430,8 +430,8 @@ function Home() {
             </p>
           </div>
 
-          <div className="text-center p-8 bg-green-50 rounded-xl hover:shadow-lg transition-shadow">
-            <div className="w-16 h-16 bg-green-600 rounded-full flex items-center justify-center mx-auto mb-4">
+          <div className="text-center p-8 bg-green-50 rounded-xl hover:shadow-2xl hover:-translate-y-2 hover:bg-green-100 transition-all duration-300 cursor-pointer">
+            <div className="w-16 h-16 bg-green-600 rounded-full flex items-center justify-center mx-auto mb-4 transition-transform duration-300 group-hover:scale-110">
               <span className="text-white text-2xl">📈</span>
             </div>
             <h3 className="text-xl font-semibold mb-3 text-gray-900">Measurable Results</h3>
@@ -440,8 +440,8 @@ function Home() {
             </p>
           </div>
 
-          <div className="text-center p-8 bg-purple-50 rounded-xl hover:shadow-lg transition-shadow">
-            <div className="w-16 h-16 bg-purple-600 rounded-full flex items-center justify-center mx-auto mb-4">
+          <div className="text-center p-8 bg-purple-50 rounded-xl hover:shadow-2xl hover:-translate-y-2 hover:bg-purple-100 transition-all duration-300 cursor-pointer">
+            <div className="w-16 h-16 bg-purple-600 rounded-full flex items-center justify-center mx-auto mb-4 transition-transform duration-300 group-hover:scale-110">
               <span className="text-white text-2xl">🚀</span>
             </div>
             <h3 className="text-xl font-semibold mb-3 text-gray-900">Fast Implementation</h3>
@@ -461,12 +461,12 @@ function Home() {
               { title: 'Implementation', desc: 'We execute the strategy' },
               { title: 'Optimization', desc: 'We monitor and improve' }
             ].map((step, index) => (
-              <div className="text-center" key={index}>
-                <div className="w-12 h-12 bg-[#4361ee] rounded-full flex items-center justify-center mx-auto mb-4">
+              <div className="text-center group transition-all duration-300 hover:scale-105 hover:bg-blue-50 rounded-xl p-4 cursor-pointer" key={index}>
+                <div className="w-12 h-12 bg-[#4361ee] rounded-full flex items-center justify-center mx-auto mb-4 transition-all duration-300 group-hover:bg-blue-600 group-hover:scale-110">
                   <span className="text-white font-bold">{index + 1}</span>
                 </div>
-                <h4 className="font-semibold mb-2">{step.title}</h4>
-                <p className="text-sm text-gray-600">{step.desc}</p>
+                <h4 className="font-semibold mb-2 group-hover:text-blue-700 transition-colors duration-300">{step.title}</h4>
+                <p className="text-sm text-gray-600 group-hover:text-blue-800 transition-colors duration-300">{step.desc}</p>
               </div>
             ))}
           </div>
