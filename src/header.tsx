@@ -13,7 +13,7 @@ export default function Navbar() {
 
       {/* Logo */}
       <img
-        src="/Yellow_and_Blue_Clean_and_Minimalist_Tech_Company_Logo__1_-removebg-preview.png"
+        src="/icon.png"
         alt="Logo"
         className="h-14 md:h-[200px]"
       />
