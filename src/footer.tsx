@@ -222,8 +222,8 @@ function Footer() {
           <div className="text-sm text-white mt-4 px-4">
             <p>
               Email:{' '}
-              <a href="mailto:info@lacleodigital.com" className="underline">
-                info@lacleodigital.com
+              <a href="mailto:Faizan@lacleodigital.com" className="underline">
+              Faizan@lacleodigital.com
               </a>
             </p>
             <p>
