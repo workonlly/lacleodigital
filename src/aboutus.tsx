@@ -29,7 +29,7 @@ function Aboutus() {
         <meta property="twitter:image" content="/public/Yellow_and_Blue_Clean_and_Minimalist_Tech_Company_Logo__1_-removebg-preview.png" />
       </Helmet>
       
-      <section className='sticky top-5 z-50'><Navbar/></section>
+      <section className='sticky top-0 z-50'><Navbar/></section>
         
       <header className="text-center py-12 space-y-2 bg-[#4361ee] px-4">
   <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-wide">About Us</h2>

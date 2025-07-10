@@ -31,7 +31,7 @@ function Blog() {
         <meta property="twitter:description" content="Transform your business with strategic virtual marketing campaigns and in-depth data analysis." />
         <meta property="twitter:image" content="/public/Yellow_and_Blue_Clean_and_Minimalist_Tech_Company_Logo__1_-removebg-preview.png" />
       </Helmet>
-      <section className='sticky top-5 z-50'><Navbar/></section>
+      <section className='sticky top-0 z-50'><Navbar/></section>
       <header className="text-center py-8 space-y-2 mt-5 bg-[#4361ee]">
         <h2 className="text-3xl text-white font-bold">Blog</h2>
         <h6 className="text-lg text-white text-gray-500">Services &nbsp;•&nbsp; Digital Marketing &nbsp;•&nbsp; Social Media Marketing</h6>

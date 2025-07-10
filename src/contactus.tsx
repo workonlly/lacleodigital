@@ -45,7 +45,7 @@ const ContactUs = () => {
         <meta property="twitter:image" content="/public/Yellow_and_Blue_Clean_and_Minimalist_Tech_Company_Logo__1_-removebg-preview.png" />
       </Helmet>
       
-        <section className='sticky top-5 z-50'><Navbar/></section>
+        <section className='sticky top-0 z-50'><Navbar/></section>
       {/* Header */}
       <header className="text-center py-8 sm:py-10 mt-5 space-y-2 bg-[#4361ee] w-full px-4">
         <h2 className="text-2xl sm:text-3xl font-bold text-white">Contact Us</h2>
@@ -100,13 +100,13 @@ const ContactUs = () => {
       {/* Social Icons */}
       <div className="flex flex-wrap justify-center gap-4 mt-4">
         <a href="https://www.facebook.com/lacleodigital" target="_blank" rel="noopener noreferrer" className="hover:scale-110 transition">
-          <img src="/img/facebook.svg" alt="Facebook" className="w-8 h-8" />
+          <img src="/images__1_-removebg-preview.png" alt="Facebook" className="w-8 h-8" />
         </a>
         <a href="https://www.instagram.com/lacleodigital/" target="_blank" rel="noopener noreferrer" className="hover:scale-110 transition">
-          <img src="/img/instagram.svg" alt="Instagram" className="w-8 h-8" />
+          <img src="/images-removebg-preview (1).png" alt="Instagram" className="w-8 h-8" />
         </a>
         <a href="https://www.linkedin.com/company/lacleodigital/" target="_blank" rel="noopener noreferrer" className="hover:scale-110 transition">
-          <img src="/img/linkedin.svg" alt="LinkedIn" className="w-8 h-8" />
+          <img src="/linkedin-logo-linkedin-symbol-linkedin-icon-free-free-vector-removebg-preview.png" alt="LinkedIn" className="w-8 h-8" />
         </a>
         {/* Add more icons as needed */}
       </div>

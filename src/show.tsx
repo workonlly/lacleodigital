@@ -69,7 +69,7 @@ function Show() {
       </Helmet>
       
       {/* Navbar */}
-      <section className="sticky top-5 z-50">
+      <section className="sticky top-0 z-50">
         <Navbar />
       </section>
 

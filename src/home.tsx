@@ -229,7 +229,7 @@ function Home() {
             <meta property="twitter:description" content="Transform your business with strategic virtual marketing campaigns and in-depth data analysis." />
             <meta property="twitter:image" content="/public/Yellow_and_Blue_Clean_and_Minimalist_Tech_Company_Logo__1_-removebg-preview.png" />
           </Helmet>
-          <section id='nav' className='sticky top-5 z-50'><Navbar/></section>
+          <section id='nav' className='sticky top-0 z-50'><Navbar/></section>
     <section className="relative min-h-screen flex items-center overflow-hidden mt-10">
       <div className="container mx-auto px-4 md:px-8 flex flex-col lg:flex-row items-center gap-12">
         
