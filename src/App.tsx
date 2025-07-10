@@ -10,6 +10,8 @@ import Aboutus from './aboutus';
 import ContactUs from './contactus';
 import Show from './show';
 import { HelmetProvider } from 'react-helmet-async';
+import Privacypolicy from './privacypolicy';
+import Terms from './terms';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -25,6 +27,8 @@ function App() {
           <Route path="/blog" element={<Blog/>} />
           <Route path="/contactus" element={<ContactUs/>} />
           <Route path="/show" element={<Show/>} />
+          <Route path="/privacy" element={<Privacypolicy/>} />
+          <Route path="/terms" element={<Terms/>} />
           <Route path="/admin" element={
             isAuthenticated
               ? <Admin onLogout={() => setIsAuthenticated(false)} />

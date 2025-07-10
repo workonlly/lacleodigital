@@ -30,6 +30,11 @@ const profiles = [
     src: '/imo/fiverrrr-removebg-preview.png',
     alt: 'Fiverr',
   },
+  {
+    href: 'https://www.trustpilot.com/review/lacleodigital.com',
+    src: '/newint-removebg-preview.png',
+    alt: 'Fiverr',
+  },
 ];
 
 function Footer() {
@@ -202,13 +207,13 @@ function Footer() {
             Book A Consultation
           </a>
           <a
-            href="/"
+            href="/privacy"
             className="nav-link text-base font-medium py-2 px-4 rounded-md hover:bg-white hover:text-black transition"
           >
             Privacy Policy
           </a>
           <a
-            href="/"
+            href="/terms"
             className="nav-link text-base font-medium py-2 px-4 rounded-md hover:bg-white hover:text-black transition"
           >
             Terms of Service
