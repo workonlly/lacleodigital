@@ -2,7 +2,7 @@
 
 import React, { useRef, useState } from 'react';
 import emailjs from '@emailjs/browser';
-
+import { Link } from 'react-router-dom';
 
 const profiles = [
   {
@@ -179,19 +179,19 @@ function Footer() {
         <div className="space-y-2 min-w-[150px] flex flex-col w-full sm:w-auto">
           {[
             ['Home', '/'],
-            ['Services', '/dista/services/index.html'],
-            ['Case Studies', '/dista/case/index.html'],
-            ['About Us', '/dista/aboutus/index.html'],
-            ['Blog', '/dista/blog/index.html'],
-            ['Contact Us', '/dista/contactus/index.html'],
+            ['Services', '/services'],
+            ['Case Studies', '/casestudies'],
+            ['About Us', '/aboutus'],
+            ['Blog', '/blog'],
+            ['Contact Us', '/contactus'],
           ].map(([label, link]) => (
-            <a
+            <Link
               key={label}
-              href={link}
+              to={link}
               className="nav-link text-base font-medium py-2 px-4 rounded-md hover:bg-white hover:text-black transition"
             >
               {label}
-            </a>
+            </Link>
           ))}
         </div>
 
@@ -200,24 +200,24 @@ function Footer() {
 
         {/* Column 3 - Contact & Social */}
         <div className="space-y-2 w-full sm:w-auto flex flex-col text-left">
-          <a
-            href="/dista/contactus/index.html"
+          <Link
+            to="/dista/contactus/index.html"
             className="nav-link text-base font-medium py-2 px-4 rounded-md hover:bg-white hover:text-black transition"
           >
             Book A Consultation
-          </a>
-          <a
-            href="/privacy"
+          </Link>
+          <Link
+            to="/privacy"
             className="nav-link text-base font-medium py-2 px-4 rounded-md hover:bg-white hover:text-black transition"
           >
             Privacy Policy
-          </a>
-          <a
-            href="/terms"
+          </Link>
+          <Link
+            to="/terms"
             className="nav-link text-base font-medium py-2 px-4 rounded-md hover:bg-white hover:text-black transition"
           >
             Terms of Service
-          </a>
+          </Link>
 
           <div className="text-sm text-white mt-4 px-4">
             <p>
