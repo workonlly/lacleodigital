@@ -201,7 +201,7 @@ function Footer() {
         {/* Column 3 - Contact & Social */}
         <div className="space-y-2 w-full sm:w-auto flex flex-col text-left">
           <Link
-            to="/dista/contactus/index.html"
+            to="/contactus"
             className="nav-link text-base font-medium py-2 px-4 rounded-md hover:bg-white hover:text-black transition"
           >
             Book A Consultation
