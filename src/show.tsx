@@ -17,6 +17,8 @@ function Show() {
   const subItem = data.maindata2.find(sub => sub.sid === parseInt(id || "0"));
 
   useEffect(() => {
+  
+
     const lenis = new Lenis({
       duration: 0.8,
       easing: (t) => 1 - Math.pow(1 - t, 3),
@@ -31,15 +33,18 @@ function Show() {
 
   if (loading) {
     return (
-      <div>
-        <section className="sticky top-5 z-50">
-          <Navbar />
-        </section>
-        <div className="flex justify-center items-center min-h-screen">
-          <p>Loading data...</p>
+      <div id="loader" className="fixed inset-0 w-screen h-screen flex justify-center items-center z-50 bg-black">
+      <div id="loader-box" className="flex w-screen h-screen justify-center items-center absolute">
+        <div className="text-center">
+          <div className="text-white text-4xl sm:text-6xl md:text-7xl font-bold mb-4 animate-pulse">
+            LaCleo Digital
+          </div>
+          <div className="w-32 h-1 bg-white/30 rounded-full mx-auto overflow-hidden">
+            <div className="w-full h-full bg-white rounded-full animate-pulse"></div>
+          </div>
         </div>
-        <Footer />
       </div>
+    </div>
     );
   }
 
@@ -98,7 +103,7 @@ function Show() {
         <h3 className="text-center text-xl text-white font-semibold mb-5">
           Trusted by some of the biggest brands
         </h3>
-        <div className="flex justify-center items-center gap-4 flex-wrap wave-text">
+        <div className="flex justify-center items-center gap-4 flex-wrap ">
           {[
             "binmile", "edureka", "isntamart", "lambdatest", "link", "livespace"
           ].map((logo, idx) => (

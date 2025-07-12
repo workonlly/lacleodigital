@@ -71,7 +71,7 @@ function Casestudies() {
 
   <section className="bg-[#4361ee] py-10 px-6">
                   <h3 className="text-center text-xl text-white font-semibold mb-5">Trusted by some of the biggest brands</h3>
-                  <div className="flex justify-center items-center gap-4 flex-wrap wave-text">
+                  <div className="flex justify-center items-center gap-4 flex-wrap ">
                     <span className=" w-28  bg-[#4361ee]  flex justify-center items-center"> <img src="/img/binmile-removebg-preview.png" alt=""/></span>
                     <span className=" w-28  bg-[#4361ee]  flex justify-center items-center"> <img src="/img/edureka-removebg-preview.png" alt=""/></span>
                     <span className=" w-28  bg-[#4361ee]  flex justify-center items-center"> <img src="/img/isntamart-removebg-preview.png" alt=""/></span>

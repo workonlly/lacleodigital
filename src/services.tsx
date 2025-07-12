@@ -26,7 +26,22 @@ function Services() {
 
   
 
-  if (loading) return <p>Loading data...</p>
+  if (loading) {
+    return (
+      <div id="loader" className="fixed inset-0 w-screen h-screen flex justify-center items-center z-50 bg-black">
+      <div id="loader-box" className="flex w-screen h-screen justify-center items-center absolute">
+        <div className="text-center">
+          <div className="text-white text-4xl sm:text-6xl md:text-7xl font-bold mb-4 animate-pulse">
+            LaCleo Digital
+          </div>
+          <div className="w-32 h-1 bg-white/30 rounded-full mx-auto overflow-hidden">
+            <div className="w-full h-full bg-white rounded-full animate-pulse"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    );
+  }
   return (
     <div>
       <Helmet>
@@ -67,7 +82,7 @@ function Services() {
 
   <section className="bg-[#4361ee] py-10 px-6">
                   <h3 className="text-center text-xl text-white font-semibold mb-5">Trusted by some of the biggest brands</h3>
-                  <div className="flex justify-center items-center gap-4 flex-wrap wave-text">
+                  <div className="flex justify-center items-center gap-4 flex-wrap ">
                     <span className=" w-28  bg-[#4361ee]  flex justify-center items-center"> <img src="/img/binmile-removebg-preview.png" alt=""/></span>
                     <span className=" w-28  bg-[#4361ee]  flex justify-center items-center"> <img src="/img/edureka-removebg-preview.png" alt=""/></span>
                     <span className=" w-28  bg-[#4361ee]  flex justify-center items-center"> <img src="/img/isntamart-removebg-preview.png" alt=""/></span>
@@ -87,6 +102,7 @@ function Services() {
         key={item.id}
         className="w-full max-w-4xl p-6 border border-gray-200 rounded-xl space-y-6 shadow-sm"
       >
+       <Link to={`/show/${item.promo.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')}?id=${item.id}`}>
         {/* Parent Info */}
         <div className="flex items-center gap-4">
           {mainImg && (
@@ -109,7 +125,7 @@ function Services() {
             return (
               <Link
                 key={child.sid}
-                to={`/show?id=${child.sid}`}
+                to={`/show/${child.promo.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')}?id=${child.sid}`}
                 className="flex items-center gap-3 p-4 bg-white rounded-lg shadow-md hover:shadow-lg border border-transparent hover:border-gray-300 transition duration-200"
               >
                 {childImg && (
@@ -131,12 +147,13 @@ function Services() {
         {/* Centered Button */}
         <div className="pt-4 text-center">
           <Link
-            to={`/show?id=${item.id}`}
+            to={`/show/${item.promo.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')}?id=${item.id}`}
             className="inline-block text-sm font-medium text-[#4361ee] hover:underline"
           >
             View full details →
           </Link>
         </div>
+        </Link>
       </div>
     );
   })}

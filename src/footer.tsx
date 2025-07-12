@@ -3,7 +3,7 @@
 import React, { useRef, useState } from 'react';
 import emailjs from '@emailjs/browser';
 import { Link } from 'react-router-dom';
-
+import useAppData from './assets/data';
 const profiles = [
   {
     href: 'https://www.upwork.com/ag/lacleodgital/',
@@ -38,6 +38,7 @@ const profiles = [
 ];
 
 function Footer() {
+  const {data}=useAppData();
   const form = useRef<HTMLFormElement>(null);
   const [status, setStatus] = useState<string | null>(null);
 
@@ -173,90 +174,98 @@ function Footer() {
       </div>
     </div>
        <footer className="bg-black text-white py-12 w-full overflow-x-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 flex flex-wrap justify-between gap-y-10">
-
-        {/* Column 1 - Navigation */}
-        <div className="space-y-2 min-w-[150px] flex flex-col w-full sm:w-auto">
-          {[
-            ['Home', '/'],
-            ['Services', '/services'],
-            ['Case Studies', '/casestudies'],
-            ['About Us', '/aboutus'],
-            ['Blog', '/blog'],
-            ['Contact Us', '/contactus'],
-          ].map(([label, link]) => (
-            <Link
-              key={label}
-              to={link}
-              className="nav-link text-base font-medium py-2 px-4 rounded-md hover:bg-white hover:text-black transition"
-            >
-              {label}
-            </Link>
-          ))}
-        </div>
-
-        {/* Column 2 - Can dynamically inject in future */}
-        <div id="import2" className="w-full sm:w-auto" />
-
-        {/* Column 3 - Contact & Social */}
-        <div className="space-y-2 w-full sm:w-auto flex flex-col text-left">
-          <Link
-            to="/contactus"
-            className="nav-link text-base font-medium py-2 px-4 rounded-md hover:bg-white hover:text-black transition"
-          >
-            Book A Consultation
-          </Link>
-          <Link
-            to="/privacy"
-            className="nav-link text-base font-medium py-2 px-4 rounded-md hover:bg-white hover:text-black transition"
-          >
-            Privacy Policy
-          </Link>
-          <Link
-            to="/terms"
-            className="nav-link text-base font-medium py-2 px-4 rounded-md hover:bg-white hover:text-black transition"
-          >
-            Terms of Service
-          </Link>
-
-          <div className="text-sm text-white mt-4 px-4">
-            <p>
-              Email:{' '}
-              <a href="mailto:Faizan@lacleodigital.com" className="underline">
-              Faizan@lacleodigital.com
-              </a>
-            </p>
-            <p>
-              WhatsApp:{' '}
-              <a href="https://wa.me/917428149253" className="underline">
-                +91-7428149253
-              </a>
-            </p>
-          </div>
-
-          <div className="flex gap-4 text-xl mt-4 px-4 text-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12">
+        <div className="  gap-6 mb-8">
+          
+          {/* Column 1 - Main Navigation */}
+          <div className="space-y-2">
             {[
-              ['fab fa-facebook-f', '#'],
-              ['fab fa-instagram', '#'],
-              ['fab fa-pinterest-p', '#'],
-              ['fab fa-linkedin-in', '#'],
-              ['fab fa-whatsapp', '#'],
-              ['fas fa-envelope', '#'],
-            ].map(([icon, link], i) => (
+              ['Home', '/'],
+              ['Services', '/services'],
+              ['Case Studies', '/casestudies'],
+              ['About Us', '/aboutus'],
+              ['Blog', '/blog'],
+              ['Contact Us', '/contactus'],
+            ].map(([label, link]) => (
               <a
-                key={i}
+                key={label}
                 href={link}
-                className="hover:bg-white/70 hover:text-black p-2 rounded-md transition"
+                className="nav-link text-sm font-medium py-1 px-2 rounded-md hover:bg-white hover:text-black transition block"
               >
-                <i className={icon}></i>
+                {label}
               </a>
             ))}
           </div>
-        </div>
-      </div>
 
-      <div className="mt-12 text-center text-sm text-white px-4">
-        &copy; La Cleo Digital Private Limited | All rights reserved.
+          {/* Column 2 - Main Services */}
+          <div className="space-y-2">
+            {data.maindata.map((item) => (
+              <a
+                key={item.id}
+                href={`/show/${item.promo.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')}?id=${item.id}`}
+                className="nav-link text-sm font-medium py-1 px-2 rounded-md hover:bg-white hover:text-black transition block"
+              >
+                {item.promo}
+              </a>
+            ))}
+          </div>
+
+          {/* Column 3 - Sub Services */}
+          <div className="space-y-2">
+            {data.maindata2.map((item) => (
+              <a
+                key={item.sid}
+                href={`/show/${item.promo.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')}?id=${item.sid}`}
+                className="nav-link text-sm font-medium py-1 px-2 rounded-md hover:bg-white hover:text-black transition block text-gray-300"
+              >
+                {item.promo}
+              </a>
+            ))}
+          </div>
+
+          {/* Column 4 - Legal & Contact */}
+          <div className="space-y-2">
+            <a
+              href="/contactus"
+              className="nav-link text-sm font-medium py-1 px-2 rounded-md hover:bg-white hover:text-black transition block"
+            >
+              Book A Consultation
+            </a>
+            <a
+              href="/privacy"
+              className="nav-link text-sm font-medium py-1 px-2 rounded-md hover:bg-white hover:text-black transition block"
+            >
+              Privacy Policy
+            </a>
+            <a
+              href="/terms"
+              className="nav-link text-sm font-medium py-1 px-2 rounded-md hover:bg-white hover:text-black transition block"
+            >
+              Terms of Service
+            </a>
+            
+            <div className="text-xs text-white mt-4 space-y-1">
+              <p>
+                Email:{' '}
+                <a href="mailto:Faizan@lacleodigital.com" className="underline hover:text-blue-400 transition">
+                Faizan@lacleodigital.com
+                </a>
+              </p>
+              <p>
+                WhatsApp:{' '}
+                <a href="https://wa.me/917428149253" className="underline hover:text-blue-400 transition">
+                  +91-7428149253
+                </a>
+              </p>
+            </div>
+
+           
+          </div>
+        </div>
+
+        <div className="text-center text-sm text-white border-t border-gray-700 pt-6">
+          &copy; La Cleo Digital Private Limited | All rights reserved.
+        </div>
       </div>
     </footer>
     </>

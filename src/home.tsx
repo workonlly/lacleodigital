@@ -91,12 +91,12 @@ function Home() {
     const mainTL = gsap.timeline();
     mainTL
       .to("#loader-box", {
-        duration: 1,
+        duration: 0.1,
         delay: 0.5,
         ease: "power2.out",
       })
       .to("#loader-box", {
-        duration: 1,
+        duration: 0.1,
         opacity: 0,
         ease: "power2.inOut",
       })
@@ -235,7 +235,7 @@ function Home() {
         
         {/* Hero Text */}
         <div className="flex-1 text-center lg:text-left space-y-6" id="hero-text">
-          <div id='herotext' className="space-y-4">
+          <div id='herotext' className="space-y-4 mt-3">
             <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold text-gray-900 leading-tight">
               <span className="inline-block wave-text text-blue-600">
                 <span>B</span>

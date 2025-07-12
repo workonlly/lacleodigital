@@ -26,7 +26,7 @@ function App() {
           <Route path="/aboutus" element={<Aboutus/>} />
           <Route path="/blog" element={<Blog/>} />
           <Route path="/contactus" element={<ContactUs/>} />
-          <Route path="/show" element={<Show/>} />
+          <Route path="/show/:slug" element={<Show/>} />
           <Route path="/privacy" element={<Privacypolicy/>} />
           <Route path="/terms" element={<Terms/>} />
           <Route path="/admin" element={

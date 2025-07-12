@@ -9,19 +9,19 @@ export default function Navbar() {
   
 
   return (
-    <header className="relative flex flex-row justify-between items-center h-20 mx-4 bg-white md:rounded-md">
+    <header className="relative flex flex-row justify-between items-center h-20 md:mx-4 bg-white md:rounded-md">
 
       {/* Logo */}
       <img
         src="/icon.png"
         alt="Logo"
-        className="h-14 md:h-[200px]"
+        className="h-40 md:h-[200px]"
       />
 
       {/* Burger Icon (Mobile only) */}
       <button
         id="burger-btn"
-        className="md:hidden flex flex-col gap-1.5 z-50"
+        className="md:hidden flex mr-5 flex-col gap-1.5 z-50"
         onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
       >
         <span className="w-6 h-0.5 bg-black"></span>
@@ -31,7 +31,7 @@ export default function Navbar() {
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className="md:hidden absolute top-full left-0 w-full bg-white shadow-md z-40 flex flex-col text-center py-4">
+        <div className="md:hidden absolute top-full left-0 w-full bg-white shadow-md z-40 flex flex-col text-center ">
           <Link to="/?id=111" className="py-2 font-medium hover:bg-black hover:text-white">Home</Link>
           <Link to="/services?id=112" className="py-2 font-medium hover:bg-black hover:text-white">Services</Link>
           <Link to="/casestudies?id=113" className="py-2 font-medium hover:bg-black hover:text-white">Case Studies</Link>
@@ -72,7 +72,7 @@ export default function Navbar() {
     {data.maindata.map((item) => (
       <div key={item.id} className="relative group/subgroup hover:bg-black hover:text-white">
         <Link
-          to={`/show?id=${item.id}`}
+          to={`/show/${item.promo.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')}?id=${item.id}`}
           className="block px-4 py-2  whitespace-nowrap"
         >
           {item.promo}
@@ -84,7 +84,7 @@ export default function Navbar() {
             .map((subItem) => (
               <Link
                 key={subItem.sid}
-                to={`/show?id=${subItem.sid}`}
+                to={`/show/${subItem.promo.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')}?id=${subItem.sid}`}
                 className="block px-4 py-2 text-black hover:bg-black hover:text-white whitespace-nowrap"
               >
                 {subItem.promo}
