@@ -2,7 +2,7 @@
 
 import React, { useRef, useState } from 'react';
 import emailjs from '@emailjs/browser';
-import { Link } from 'react-router-dom';
+
 import useAppData from './assets/data';
 const profiles = [
   {
