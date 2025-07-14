@@ -39,9 +39,10 @@ function Show() {
           <div className="text-white text-4xl sm:text-6xl md:text-7xl font-bold mb-4 animate-pulse">
             LaCleo Digital
           </div>
-          <div className="w-32 h-1 bg-white/30 rounded-full mx-auto overflow-hidden">
+          <div className="w-32 h-1 bg-white/30 rounded-full mx-auto overflow-hidden flex flex-col">
             <div className="w-full h-full bg-white rounded-full animate-pulse"></div>
           </div>
+          <div className="w-full h-full   text-white">B2B lead generation specialist</div>
         </div>
       </div>
     </div>
