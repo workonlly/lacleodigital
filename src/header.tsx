@@ -16,6 +16,9 @@ export default function Navbar() {
         src="/icon.png"
         alt="Logo"
         className="h-40 md:h-[200px]"
+        width={200} // or whatever the actual pixel width is
+        height={160}
+        loading="eager"
       />
 
       {/* Burger Icon (Mobile only) */}
