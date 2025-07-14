@@ -84,9 +84,21 @@ function Show() {
         <h2 className="text-3xl text-white font-bold">
           {mainItem?.promo || subItem?.promo}
         </h2>
-        <h6 className="text-lg text-white">
-          • {mainItem?.keywords || subItem?.keywords}
-        </h6>
+        <h6 className="text-lg text-white flex flex-wrap justify-center gap-2">
+  {(
+    Array.isArray(mainItem?.keywords)
+      ? mainItem?.keywords
+      : Array.isArray(subItem?.keywords)
+        ? subItem?.keywords
+        : mainItem?.keywords || subItem?.keywords
+          ? [mainItem?.keywords || subItem?.keywords]
+          : []
+  ).map((kw, idx) => (
+    <span key={idx} className="bg-white/20 px-2 py-0.5 rounded text-white">
+      {kw}
+    </span>
+  ))}
+</h6>
       </header>
 
       {/* Section Heading & Paragraph */}
