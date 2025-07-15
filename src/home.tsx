@@ -303,7 +303,7 @@ function Home() {
       className="block bg-white/70 shadow-xl p-4 min-h-[200px] flex flex-col items-center text-center gap-4 rounded-2xl hover:scale-105 transition-transform duration-300 hover:border-2 hover:border-black w-full"
     >
       <Link
-        to={`/show?id=${item.id}`}
+        to={`/show/${item.promo.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')}?id=${item.id}`}
         className="flex flex-col items-center gap-4 w-full no-underline"
       >
         {/* Image */}
