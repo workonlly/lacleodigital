@@ -12,14 +12,14 @@ export default function Navbar() {
     <header className="relative flex flex-row justify-between items-center h-20 md:mx-4 bg-white md:rounded-md">
 
       {/* Logo */}
-      <img
+     <a href="/?id=111"> <img
         src="/icon.png"
         alt="Logo"
         className="h-40 md:h-[200px]"
         width={200} // or whatever the actual pixel width is
         height={160}
         loading="eager"
-      />
+      /></a>
 
       {/* Burger Icon (Mobile only) */}
       <button
