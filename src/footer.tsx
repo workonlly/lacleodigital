@@ -208,7 +208,7 @@ function Footer() {
             {data.maindata.map((item) => (
               <button
                 key={item.id}
-                onClick={() => { dispatch(setId(item.id)); navigate(`/show/${item.promo.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')}?id=${item.id}`)}}
+                onClick={() => { dispatch(setId(item.id)); navigate(`/show/${item.promo.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')}`)}}
                 className="nav-link text-sm font-medium py-1 px-2 rounded-md hover:bg-white hover:text-black transition block"
               >
                 {item.promo}
@@ -219,13 +219,13 @@ function Footer() {
           {/* Column 3 - Sub Services */}
           <div className="space-y-2">
             {data.maindata2.map((item) => (
-              <a
-                key={item.sid}
-                href={`/show/${item.promo.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')}?id=${item.sid}`}
-                className="nav-link text-sm font-medium py-1 px-2 rounded-md hover:bg-white hover:text-black transition block text-gray-300"
-              >
+              <button
+              key={item.id}
+              onClick={() => { dispatch(setId(item.id)); navigate(`/show/${item.promo.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')}`)}}
+              className="nav-link text-sm font-medium py-1 px-2 rounded-md hover:bg-white hover:text-black transition block"
+            >
                 {item.promo}
-              </a>
+              </button>
             ))}
           </div>
 
