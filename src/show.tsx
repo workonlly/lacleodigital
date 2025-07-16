@@ -2,19 +2,23 @@ import useAppData from "./assets/data";
 import Navbar from './header';
 import Footer from './footer';
 import "./button.css";
-import { useSearchParams, Link } from 'react-router-dom';
+import {   useNavigate } from 'react-router-dom';
 import Lenis from 'lenis';
 import { useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
+import { useAppSelector, useAppDispatch } from './store/hooks';
+import { setId } from './store/selectedIdSlice';
 
 function Show() {
   const { data, loading } = useAppData();
-  const [searchParams] = useSearchParams();
-  const id = searchParams.get("id");
-  const word=data.mainkey.find((item)=>item.id==parseInt(id || "0"))
+  const id = useAppSelector(state => state.name.id);
+  const word = data.mainkey.find((item) => item.id === (id ?? 111));
 
-  const mainItem = data.maindata.find(item => item.id === parseInt(id || "0"));
-  const subItem = data.maindata2.find(sub => sub.sid === parseInt(id || "0"));
+  const mainItem = data.maindata.find(item => item.id === (id ?? 111));
+  const subItem = data.maindata2.find(sub => sub.sid === (id ?? 111));
+
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
   
@@ -49,7 +53,7 @@ function Show() {
     );
   }
 
-  const subItems = data.maindata2.filter(sub => sub.id === parseInt(id || "0"));
+  const subItems = data.maindata2.filter(sub => sub.id === (id ?? 0));
   const text = mainItem?.text || subItem?.text;
 
   return (
@@ -138,15 +142,19 @@ function Show() {
       <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-4 py-10">
         {subItems.map((item) => {
           const subImg = data.mainimg.find(img => img.id === item.sid);
+          const subSlug = item.promo.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
           return (
             <div
               key={item.sid}
               className="bg-white/70 shadow-xl p-4 min-h-[200px] flex flex-col items-center text-center gap-4 rounded-2xl hover:scale-105 transition-transform duration-300 hover:border-2 hover:border-black w-full max-w-sm mx-auto"
             >
-                             <Link
-                 to={`/show/${item.promo.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')}?id=${item.sid}`}
-                 className="flex flex-col items-center gap-4 w-full no-underline"
-               >
+              <button
+                onClick={() => {
+                  dispatch(setId(item.sid));
+                  navigate(`/show/${subSlug}`);
+                }}
+                className="flex flex-col items-center gap-4 w-full no-underline bg-transparent border-0 cursor-pointer"
+              >
                 <div className="rounded-full h-20 w-20 overflow-hidden ">
                   <img
                     src={subImg?.imageurl }
@@ -161,7 +169,7 @@ function Show() {
                                  <span className="text-black px-4 py-1.5 hover:text-white hover:bg-black rounded-full text-sm font-medium transition-all border border-black">
                    Learn more →
                  </span>
-               </Link>
+               </button>
             </div>
           );
         })}

@@ -5,12 +5,14 @@ import useAppData from "./assets/data";
 import Navbar from './header';
 import Footer from './footer';
 import ClientReviewsSwiper from './assets/ClientReviewsSwiper';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Lenis from 'lenis';
 import { useEffect,  useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { useAppDispatch } from './store/hooks';
+import { setId } from './store/selectedIdSlice';
 
 
 gsap.registerPlugin(ScrollTrigger)
@@ -49,6 +51,8 @@ const logos = [
 
 function Home() {
   const [showContent, setShowContent] = useState(false);
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const { data, loading } = useAppData();
   const word=data.mainkey.find((item)=>item.id==111)
@@ -302,8 +306,8 @@ function Home() {
       key={item.id}
       className="block bg-white/70 shadow-xl p-4 min-h-[200px] flex flex-col items-center text-center gap-4 rounded-2xl hover:scale-105 transition-transform duration-300 hover:border-2 hover:border-black w-full"
     >
-      <Link
-        to={`/show/${item.promo.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')}?id=${item.id}`}
+      <button
+        onClick={() => { dispatch(setId(item.id)); navigate(`/show/${item.promo.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')}`); }}
         className="flex flex-col items-center gap-4 w-full no-underline"
       >
         {/* Image */}
@@ -327,7 +331,7 @@ function Home() {
         <span className="text-black px-3 py-1 hover:text-white hover:bg-black rounded-full text-sm font-medium transition">
           Learn more →
         </span>
-      </Link>
+      </button>
     </div>
   );
 })}

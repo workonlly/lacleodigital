@@ -2,7 +2,9 @@
 import Navbar from './header';
 import Footer from './footer';
 import "./button.css"
-import { Link } from 'react-router-dom';
+import { useAppDispatch } from './store/hooks';
+import { setId } from './store/selectedIdSlice';
+import { useNavigate } from 'react-router-dom';
 import Lenis from 'lenis';
 import { useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
@@ -23,6 +25,8 @@ function Services() {
   }, []);
   const { data, loading } = useAppData()
   const word=data.mainkey.find((item)=>item.id==112)
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   
 
@@ -97,13 +101,21 @@ function Services() {
   {data.maindata.map((item) => {
     const children = data.maindata2.filter((tab) => tab.id === item.id);
     const mainImg = data.mainimg.find((img) => img.id === item.id);
+    const slug = item.promo.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
 
     return (
       <div
         key={item.id}
         className="w-full max-w-4xl p-6 border border-gray-200 rounded-xl space-y-6 shadow-sm"
       >
-       <Link to={`/show/${item.promo.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')}?id=${item.id}`}>
+       <button
+         onClick={() => {
+           dispatch(setId(item.id));
+           navigate(`/show/${slug}`);
+         }}
+         className="w-full text-left"
+         style={{ background: 'none', border: 'none', padding: 0, margin: 0, cursor: 'pointer' }}
+       >
         {/* Parent Info */}
         <div className="flex items-center gap-4">
           {mainImg && (
@@ -123,11 +135,16 @@ function Services() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {children.map((child) => {
             const childImg = data.mainimg.find((img) => img.id === child.sid);
+            const childSlug = child.promo.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
             return (
-              <Link
+              <button
                 key={child.sid}
-                to={`/show/${child.promo.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')}?id=${child.sid}`}
-                className="flex items-center gap-3 p-4 bg-white rounded-lg shadow-md hover:shadow-lg border border-transparent hover:border-gray-300 transition duration-200"
+                onClick={() => {
+                  dispatch(setId(child.sid));
+                  navigate(`/show/${childSlug}`);
+                }}
+                className="flex items-center gap-3 p-4 bg-white rounded-lg shadow-md hover:shadow-lg border border-transparent hover:border-gray-300 transition duration-200 w-full text-left"
+                style={{ background: 'none', border: 'none', padding: 0, margin: 0, cursor: 'pointer' }}
               >
                 {childImg && (
                   <img
@@ -140,21 +157,24 @@ function Services() {
                   <h4 className="text-sm font-semibold text-gray-800">{child.promo}</h4>
                   <p className="text-xs text-gray-600">{child.heading}</p>
                 </div>
-              </Link>
+              </button>
             );
           })}
         </div>
 
         {/* Centered Button */}
         <div className="pt-4 text-center">
-          <Link
-            to={`/show/${item.promo.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')}?id=${item.id}`}
-            className="inline-block text-sm font-medium text-[#4361ee] hover:underline"
+          <button
+            onClick={() => {
+              dispatch(setId(item.id));
+              navigate(`/show/${slug}`);
+            }}
+            className="inline-block text-sm font-medium text-[#4361ee] hover:underline bg-transparent border-0 cursor-pointer"
           >
-            View full details →
-          </Link>
+            Learn more
+          </button>
         </div>
-        </Link>
+        </button>
       </div>
     );
   })}
