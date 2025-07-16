@@ -4,6 +4,7 @@ import Footer from './footer';
 import "./button.css"
 import { useAppDispatch } from './store/hooks';
 import { setId } from './store/selectedIdSlice';
+import { useNavigate } from 'react-router-dom';
 import Lenis from 'lenis';
 import { useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
@@ -25,6 +26,7 @@ function Services() {
   const { data, loading } = useAppData()
   const word=data.mainkey.find((item)=>item.id==112)
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   
 
@@ -109,7 +111,8 @@ function Services() {
        <button
          onClick={() => {
            dispatch(setId(item.id));
-           window.location.href = `/show/${slug}`;
+           navigate(`/show/${slug}`);
+           window.scrollTo(0, 0);
          }}
          className="w-full text-left"
          style={{ background: 'none', border: 'none', padding: 0, margin: 0, cursor: 'pointer' }}
@@ -139,7 +142,8 @@ function Services() {
                 key={child.sid}
                 onClick={() => {
                   dispatch(setId(child.sid));
-                  window.location.href = `/show/${childSlug}`;
+                  navigate(`/show/${childSlug}`);
+                  window.scrollTo(0, 0);
                 }}
                 className="flex items-center gap-3 p-4 bg-white rounded-lg shadow-md hover:shadow-lg border border-transparent hover:border-gray-300 transition duration-200 w-full text-left"
                 style={{ background: 'none', border: 'none', padding: 0, margin: 0, cursor: 'pointer' }}
@@ -165,7 +169,8 @@ function Services() {
           <button
             onClick={() => {
               dispatch(setId(item.id));
-              window.location.href = `/show/${slug}`;
+              navigate(`/show/${slug}`);
+              window.scrollTo(0, 0);
             }}
             className="inline-block text-sm font-medium text-[#4361ee] hover:underline bg-transparent border-0 cursor-pointer"
           >

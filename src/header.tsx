@@ -1,6 +1,6 @@
 import { useState } from "react";
 import './button.css'
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useAppData from "./assets/data";
 import { useAppDispatch } from './store/hooks';
 import { setId } from './store/selectedIdSlice';
@@ -9,12 +9,14 @@ export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { data } = useAppData();
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   // Handler for navigation to show page with id and promo slug
   const handleShowNav = (id: number, promo: string) => {
     dispatch(setId(id));
     const slug = promo.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
-    window.location.href = `/show/${slug}`;
+    navigate(`/show/${slug}`);
+    window.scrollTo(0, 0);
   };
 
   return (

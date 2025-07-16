@@ -7,6 +7,7 @@ import { useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useAppSelector, useAppDispatch } from './store/hooks';
 import { setId } from './store/selectedIdSlice';
+import { useNavigate } from 'react-router-dom';
 
 function Show() {
   const { data, loading } = useAppData();
@@ -17,6 +18,7 @@ function Show() {
   const subItem = data.maindata2.find(sub => sub.sid === (id ?? 111));
 
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
   
@@ -149,7 +151,8 @@ function Show() {
               <button
                 onClick={() => {
                   dispatch(setId(item.sid));
-                  window.location.href = `/show/${subSlug}`;
+                  navigate(`/show/${subSlug}`);
+                  window.scrollTo(0, 0);
                 }}
                 className="flex flex-col items-center gap-4 w-full no-underline bg-transparent border-0 cursor-pointer"
               >

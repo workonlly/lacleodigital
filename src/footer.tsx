@@ -6,6 +6,7 @@ import emailjs from '@emailjs/browser';
 import useAppData from './assets/data';
 import { useAppDispatch } from './store/hooks';
 import { setId } from './store/selectedIdSlice';
+import { useNavigate } from 'react-router-dom';
 const profiles = [
   {
     href: 'https://www.upwork.com/ag/lacleodgital/',
@@ -50,6 +51,7 @@ function Footer() {
   const PUBLIC_KEY = (import.meta.env as any).VITE_EMAILJS_PUBLIC_KEY;
 
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const sendEmail = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -206,7 +208,7 @@ function Footer() {
             {data.maindata.map((item) => (
               <button
                 key={item.id}
-                onClick={() => { dispatch(setId(item.id)); window.location.href = `/show/${item.promo.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')}?id=${item.id}`; }}
+                onClick={() => { dispatch(setId(item.id)); navigate(`/show/${item.promo.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')}?id=${item.id}`); window.scrollTo(0, 0); }}
                 className="nav-link text-sm font-medium py-1 px-2 rounded-md hover:bg-white hover:text-black transition block"
               >
                 {item.promo}
@@ -219,7 +221,7 @@ function Footer() {
             {data.maindata2.map((item) => (
               <button
               key={item.id}
-              onClick={() => { dispatch(setId(item.id)); window.location.href = `/show/${item.promo.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')}?id=${item.id}`; }}
+              onClick={() => { dispatch(setId(item.id)); navigate(`/show/${item.promo.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')}?id=${item.id}`); window.scrollTo(0, 0); }}
               className="nav-link text-sm font-medium py-1 px-2 rounded-md hover:bg-white hover:text-black transition block"
             >
                 {item.promo}
