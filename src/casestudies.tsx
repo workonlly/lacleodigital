@@ -34,14 +34,14 @@ function Casestudies() {
         <meta property="og:url" content="https://lacleodigital.com/" />
         <meta property="og:title" content="LaCleo Digital - B2B Lead Generation Specialists" />
         <meta property="og:description" content="Transform your business with strategic virtual marketing campaigns and in-depth data analysis." />
-        <meta property="og:image" content="/public/Yellow_and_Blue_Clean_and_Minimalist_Tech_Company_Logo__1_-removebg-preview.png" />
+        <meta property="og:image" content="/icon.png" />
         
         {/* Twitter */}
         <meta property="twitter:card" content="summary_large_image" />
         <meta property="twitter:url" content="https://lacleodigital.com/" />
         <meta property="twitter:title" content="LaCleo Digital - B2B Lead Generation Specialists" />
         <meta property="twitter:description" content="Transform your business with strategic virtual marketing campaigns and in-depth data analysis." />
-        <meta property="twitter:image" content="/public/Yellow_and_Blue_Clean_and_Minimalist_Tech_Company_Logo__1_-removebg-preview.png" />
+        <meta property="twitter:image" content="/icon.png" />
       </Helmet>
         
       <section className='sticky top-0 z-50'><Navbar/></section>

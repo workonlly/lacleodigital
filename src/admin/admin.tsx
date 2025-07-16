@@ -146,14 +146,14 @@ function Admin({ onLogout }: AdminProps) {
         <meta property="og:url" content="https://lacleodigital.com/admin" />
         <meta property="og:title" content="Admin Dashboard | LaCleo Digital" />
         <meta property="og:description" content="Admin dashboard for managing LaCleo Digital content." />
-        <meta property="og:image" content="/public/Yellow_and_Blue_Clean_and_Minimalist_Tech_Company_Logo__1_-removebg-preview.png" />
+        <meta property="og:image" content="/icon.png" />
         
         {/* Twitter */}
         <meta property="twitter:card" content="summary_large_image" />
         <meta property="twitter:url" content="https://lacleodigital.com/admin" />
         <meta property="twitter:title" content="Admin Dashboard | LaCleo Digital" />
         <meta property="twitter:description" content="Admin dashboard for managing LaCleo Digital content." />
-        <meta property="twitter:image" content="/public/Yellow_and_Blue_Clean_and_Minimalist_Tech_Company_Logo__1_-removebg-preview.png" />
+        <meta property="twitter:image" content="/icon.png" />
       </Helmet>
       
       {/* Logout Button */}

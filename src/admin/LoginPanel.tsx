@@ -149,14 +149,14 @@ export default function LoginPanel({ onLogin, isAuthenticated }: LoginPanelProps
         <meta property="og:url" content="https://lacleodigital.com/admin" />
         <meta property="og:title" content="Admin Login | LaCleo Digital" />
         <meta property="og:description" content="Secure admin login for LaCleo Digital content management." />
-        <meta property="og:image" content="/public/Yellow_and_Blue_Clean_and_Minimalist_Tech_Company_Logo__1_-removebg-preview.png" />
+        <meta property="og:image" content="/icon.png" />
         
         {/* Twitter */}
         <meta property="twitter:card" content="summary_large_image" />
         <meta property="twitter:url" content="https://lacleodigital.com/admin" />
         <meta property="twitter:title" content="Admin Login | LaCleo Digital" />
-        <meta property="twitter:description" content="Secure admin login for LaCleo Digital content management." />
-        <meta property="twitter:image" content="/public/Yellow_and_Blue_Clean_and_Minimalist_Tech_Company_Logo__1_-removebg-preview.png" />
+        <meta property="twitter:description" content="Secure admin login for managing LaCleo Digital content." />
+        <meta property="twitter:image" content="/icon.png" />
       </Helmet>
       
       <div className="bg-white rounded-xl shadow-2xl p-8 w-full max-w-md">
