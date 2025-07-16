@@ -19,6 +19,11 @@ export default function Navbar() {
     window.scrollTo(0, 0);
   };
 
+  // Handler for scrolling to top on link click
+  const handleLinkClick = () => {
+    window.scrollTo(0, 0);
+  };
+
   return (
     <header className="relative flex flex-row justify-between items-center h-20 md:mx-4 bg-white md:rounded-md">
 
@@ -46,13 +51,13 @@ export default function Navbar() {
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
         <div className="md:hidden absolute top-full left-0 w-full bg-white shadow-md z-40 flex flex-col text-center ">
-          <Link to="/" className="py-2 font-medium hover:bg-black hover:text-white">Home</Link>
-          <Link to="/services" className="py-2 font-medium hover:bg-black hover:text-white">Services</Link>
-          <Link to="/casestudies" className="py-2 font-medium hover:bg-black hover:text-white">Case Studies</Link>
-          <Link to="/aboutus" className="py-2 font-medium hover:bg-black hover:text-white">About Us</Link>
-          <Link to="/blog" className="py-2 font-medium hover:bg-black hover:text-white">Blog</Link>
-          <Link to="/contactus" className="py-2 font-medium hover:bg-black hover:text-white">Contact Us</Link>
-          <Link to="/contactus">
+          <Link to="/" className="py-2 font-medium hover:bg-black hover:text-white" onClick={handleLinkClick}>Home</Link>
+          <Link to="/services" className="py-2 font-medium hover:bg-black hover:text-white" onClick={handleLinkClick}>Services</Link>
+          <Link to="/casestudies" className="py-2 font-medium hover:bg-black hover:text-white" onClick={handleLinkClick}>Case Studies</Link>
+          <Link to="/aboutus" className="py-2 font-medium hover:bg-black hover:text-white" onClick={handleLinkClick}>About Us</Link>
+          <Link to="/blog" className="py-2 font-medium hover:bg-black hover:text-white" onClick={handleLinkClick}>Blog</Link>
+          <Link to="/contactus" className="py-2 font-medium hover:bg-black hover:text-white" onClick={handleLinkClick}>Contact Us</Link>
+          <Link to="/contactus" onClick={handleLinkClick}>
           <div className="mt-4 mx-4 bg-black text-white py-2 rounded font-medium">
             BOOK A CONSULTATION
           </div></Link>
@@ -61,7 +66,7 @@ export default function Navbar() {
 
       {/* Desktop Navigation */}
       <div className="hidden md:flex flex-row items-center gap-3 font-semibold  ">
-        <Link to="/" className="nav-link text-center  py-2 px-4 rounded-md hover:text-white hover:bg-black">
+        <Link to="/" className="nav-link text-center  py-2 px-4 rounded-md hover:text-white hover:bg-black" onClick={handleLinkClick}>
           Home
         </Link>
 
@@ -70,6 +75,7 @@ export default function Navbar() {
           <Link
             to="/services"
             className="nav-link  py-2 px-4 rounded-md hover:text-white hover:bg-black flex items-center"
+            onClick={handleLinkClick}
           >
             Services
             <svg
@@ -112,15 +118,15 @@ export default function Navbar() {
           </div>
         </div>
 
-        <Link to="/casestudies" className="nav-link   py-2 px-4 rounded-md hover:text-white hover:bg-black">Case Studies</Link>
-        <Link to="/aboutus" className="nav-link   py-2 px-4 rounded-md hover:text-white hover:bg-black">About Us</Link>
-        <Link to="/blog" className="nav-link   py-2 px-4 rounded-md hover:text-white hover:bg-black">Blog</Link>
-        <Link to="/contactus" className="nav-link   py-2 px-4 rounded-md hover:text-white hover:bg-black">Contact Us</Link>
+        <Link to="/casestudies" className="nav-link   py-2 px-4 rounded-md hover:text-white hover:bg-black" onClick={handleLinkClick}>Case Studies</Link>
+        <Link to="/aboutus" className="nav-link   py-2 px-4 rounded-md hover:text-white hover:bg-black" onClick={handleLinkClick}>About Us</Link>
+        <Link to="/blog" className="nav-link   py-2 px-4 rounded-md hover:text-white hover:bg-black" onClick={handleLinkClick}>Blog</Link>
+        <Link to="/contactus" className="nav-link   py-2 px-4 rounded-md hover:text-white hover:bg-black" onClick={handleLinkClick}>Contact Us</Link>
       </div>
 
       {/* CTA Button (Desktop only) */}
          <div className="translate-y-[1px] right-5 g-hov w-[50%] sm:w-[30%] md:w-[16%] h-[60%] z-30 g-hov hidden md:block">
-     <Link to="/contactus">
+     <Link to="/contactus" onClick={handleLinkClick}>
       <div className="button-1"></div>
       <div className="button-2"></div>
      <div className="button-3 flex justify-center items-center text-sm sm:text-base font-medium text-white">BOOK A CONSULTATION</div>
