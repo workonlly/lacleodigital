@@ -5,7 +5,7 @@ import useAppData from "./assets/data";
 import Navbar from './header';
 import Footer from './footer';
 import ClientReviewsSwiper from './assets/ClientReviewsSwiper';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Lenis from 'lenis';
 import { useEffect,  useState } from 'react';
 import { Helmet } from 'react-helmet-async';
@@ -52,7 +52,6 @@ const logos = [
 function Home() {
   const [showContent, setShowContent] = useState(false);
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
 
   const { data, loading } = useAppData();
   const word=data.mainkey.find((item)=>item.id==111)
@@ -307,7 +306,7 @@ function Home() {
       className="block bg-white/70 shadow-xl p-4 min-h-[200px] flex flex-col items-center text-center gap-4 rounded-2xl hover:scale-105 transition-transform duration-300 hover:border-2 hover:border-black w-full"
     >
       <button
-        onClick={() => { dispatch(setId(item.id)); navigate(`/show/${item.promo.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')}`); }}
+        onClick={() => { dispatch(setId(item.id)); window.location.href = `/show/${item.promo.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')}`; }}
         className="flex flex-col items-center gap-4 w-full no-underline"
       >
         {/* Image */}

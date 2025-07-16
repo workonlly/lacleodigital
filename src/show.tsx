@@ -2,7 +2,6 @@ import useAppData from "./assets/data";
 import Navbar from './header';
 import Footer from './footer';
 import "./button.css";
-import {   useNavigate } from 'react-router-dom';
 import Lenis from 'lenis';
 import { useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
@@ -18,7 +17,6 @@ function Show() {
   const subItem = data.maindata2.find(sub => sub.sid === (id ?? 111));
 
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
 
   useEffect(() => {
   
@@ -151,7 +149,7 @@ function Show() {
               <button
                 onClick={() => {
                   dispatch(setId(item.sid));
-                  navigate(`/show/${subSlug}`);
+                  window.location.href = `/show/${subSlug}`;
                 }}
                 className="flex flex-col items-center gap-4 w-full no-underline bg-transparent border-0 cursor-pointer"
               >
