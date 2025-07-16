@@ -31,7 +31,7 @@ const profiles = [
   {
     href: 'https://www.fiverr.com/lacleodigital',
     src: '/imo/fiverrrr-removebg-preview.png',
-    alt: 'Fiverr',
+    alt: 'Fiver',
   },
   {
     href: 'https://www.trustpilot.com/review/lacleodigital.com',
