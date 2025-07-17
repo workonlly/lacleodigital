@@ -58,8 +58,8 @@ export default function ClientReviewsSwiper() {
   }
 
   return (
-    <div className="w-full py-10 bg-gradient-to-r from-blue-50 to-purple-50">
-      <div className="max-w-7xl mx-auto px-4">
+    <div className=" py-10 bg-gradient-to-r from-blue-50 to-purple-50">
+      <div className=" mx-auto px-4">
         <Swiper
           modules={[Autoplay]}
           spaceBetween={30}
@@ -89,25 +89,25 @@ export default function ClientReviewsSwiper() {
         >
           {reviews.map((review, index) => (
             <SwiperSlide key={index}>
-              <div className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 p-6 border border-gray-100 h-full">
+              <div className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 p-6 border border-gray-100 flex flex-col h-[40vh] max-w-md mx-auto justify-between">
                 {/* Star Rating */}
-                <div className="text-yellow-500 text-xl mb-3">
+                <div className="flex items-center justify-center text-yellow-400 text-2xl">
                   {generateRandomStars()}
                 </div>
                 
                 {/* Review Content */}
-                <div className="mb-4 flex-grow">
-                  <p className="text-gray-700 italic leading-relaxed">
+                <div className="flex flex-1 items-center justify-center">
+                  <p className="text-gray-700 italic leading-relaxed text-center text-base sm:text-lg">
                     "{review.Review || 'Great service and professional team!'}"
                   </p>
                 </div>
                 
                 {/* Client Info */}
-                <div className="border-t pt-4 mt-auto">
+                <div className="flex flex-col items-center gap-1">
                   <p className="font-semibold text-gray-800 text-lg">
                     {review.Name || 'Anonymous Client'}
                   </p>
-                  <p className="text-sm text-gray-500 flex items-center mt-1">
+                  <p className="text-sm text-gray-500 flex items-center">
                     <span className="inline-block w-2 h-2 bg-green-500 rounded-full mr-2"></span>
                     {review.Region || 'Global'}
                   </p>

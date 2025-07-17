@@ -88,7 +88,7 @@ const ContactUs = () => {
     <div className="text-white text-2xl lg:text-3xl font-extrabold">📞 Available 24×7</div>
     <p className="text-white text-lg">We are available round the clock to serve businesses globally</p>
     <div className="bg-white text-black rounded-xl p-5 flex flex-col gap-3 text-base sm:text-lg font-medium">
-      <div>Email: <a href="mailto:info@lacleodigital.com" className="text-blue-600 underline">info@lacleodigital.com</a></div>
+      <div>Email: <a href="mailto:faizan@lacleodigital.com" className="text-blue-600 underline">faizan@lacleodigital.com</a></div>
       <div>WhatsApp: <a href="https://wa.me/917428149253" className="text-blue-600 underline">+91-7428149253</a></div>
       <div>
         Book a 30 Minute Meeting: <br />
