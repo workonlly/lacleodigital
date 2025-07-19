@@ -6,12 +6,17 @@ import useAppData from './assets/data';
 import  UseBucketFiles from './assets/blogimg';
 import { useState } from 'react';
 
+import { useNavigate } from 'react-router-dom';
+
 function Blog() {
   const { data, loading: _appLoading } = useAppData();
   const word=data.mainkey.find((item)=>item.id==115)
   const { data: images, loading: _imagesLoading, error: _error } = UseBucketFiles();
-  const [selectedPost, setSelectedPost] = useState<any>(null);
   const [modalOpen, setModalOpen] = useState(false);
+
+  const navigate = useNavigate();
+  const slugify = (str: string) =>
+    str.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
   return (
     <div>
       <Helmet>
@@ -56,7 +61,7 @@ function Blog() {
               <article
                 key={item.id}
                 className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 cursor-pointer"
-                onClick={() => { setSelectedPost(item); setModalOpen(true); }}
+                onClick={() => navigate(`/blogpost/${slugify(item.heading)}`)}
               >
                 {images && images[index] && (
                   <div className="h-48 overflow-hidden">
@@ -101,7 +106,7 @@ function Blog() {
         </div>
       </section>
       {/* Modal for full blog post */}
-      {modalOpen && selectedPost && (
+      {modalOpen && (
         <div
           className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60"
           onClick={() => setModalOpen(false)}
@@ -117,10 +122,10 @@ function Blog() {
             >
               &times;
             </button>
-            <h2 className="text-2xl font-bold mb-4">{selectedPost.heading}</h2>
+            <h2 className="text-2xl font-bold mb-4">Selected Post Title</h2>
             <div
               className="prose max-w-none"
-              dangerouslySetInnerHTML={{ __html: selectedPost.description }}
+              dangerouslySetInnerHTML={{ __html: "Selected Post Description" }}
             />
           </div>
         </div>
