@@ -1,0 +1,12 @@
+# robots.txt for lacleodigital.com
+# Allow all search engines to crawl the site, except for sensitive source directories
+
+User-agent: *
+Allow: /
+
+# Disallow crawling of source/admin, assets, and store directories
+Disallow: /src/admin/
+Disallow: /src/assets/
+Disallow: /src/store/
+
+Sitemap: https://lacleodigital.com/sitemap.xml 
