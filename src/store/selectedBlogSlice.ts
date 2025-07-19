@@ -14,10 +14,18 @@ const selectedBlogSlice = createSlice({
   name: 'selectedBlog',
   initialState,
   reducers: {
-    setBlog(_state, action: PayloadAction<BlogData>): BlogData {
-      return action.payload;
+    setBlog(state: BlogData | null, action: PayloadAction<BlogData>) {
+      if (state) {
+        state.heading = action.payload.heading;
+        state.description = action.payload.description;
+        state.imageUrl = action.payload.imageUrl;
+        // Copy other fields as needed
+      } else {
+        // If state is null, mutate is not possible, so return void
+        // Redux Toolkit will handle this as a no-op
+      }
     },
-    clearBlog(): null {
+    clearBlog() {
       return null;
     }
   }
