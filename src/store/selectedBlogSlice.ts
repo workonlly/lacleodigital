@@ -1,4 +1,5 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
+import type { PayloadAction } from '@reduxjs/toolkit';
 
 interface BlogData {
   heading: string;
@@ -13,8 +14,16 @@ const selectedBlogSlice = createSlice({
   name: 'selectedBlog',
   initialState,
   reducers: {
-    setBlog(_state, action: PayloadAction<BlogData>) {
-      return action.payload;
+    setBlog(state, action: PayloadAction<BlogData>) {
+      if (state) {
+        state.heading = action.payload.heading;
+        state.description = action.payload.description;
+        state.imageUrl = action.payload.imageUrl;
+        // Copy other fields as needed
+      } else {
+        // @ts-expect-error: Immer allows this assignment
+        return action.payload;
+      }
     },
     clearBlog() {
       return null;
