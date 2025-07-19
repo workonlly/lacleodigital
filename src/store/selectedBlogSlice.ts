@@ -14,18 +14,10 @@ const selectedBlogSlice = createSlice({
   name: 'selectedBlog',
   initialState,
   reducers: {
-    setBlog(state, action: PayloadAction<BlogData>) {
-      if (state) {
-        state.heading = action.payload.heading;
-        state.description = action.payload.description;
-        state.imageUrl = action.payload.imageUrl;
-        // Copy other fields as needed
-      } else {
-        // @ts-expect-error: Immer allows this assignment
-        return action.payload;
-      }
+    setBlog(_state, action: PayloadAction<BlogData>): BlogData {
+      return action.payload;
     },
-    clearBlog() {
+    clearBlog(): null {
       return null;
     }
   }
