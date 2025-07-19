@@ -1,5 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
-import type { PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface BlogData {
   heading: string;
@@ -14,7 +13,7 @@ const selectedBlogSlice = createSlice({
   name: 'selectedBlog',
   initialState,
   reducers: {
-    setBlog(state, action: PayloadAction<BlogData>) {
+    setBlog(_state, action: PayloadAction<BlogData>) {
       return action.payload;
     },
     clearBlog() {
